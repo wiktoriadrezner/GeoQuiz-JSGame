@@ -2,6 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 * {
+    /* Color Palette */
+    --color-01: #e764a3; /* Pink */
     scroll-behavior: smooth;
     box-sizing: border-box;
     font-family: Open Sans;
@@ -40,14 +42,47 @@ main {
     grid-column-gap: 1vw;
     margin: 0 8px 0 8px;
 }
+
+/* Screen Sections */
 section {
     height: fit-content;
     background-color: yellow;
 }
 .sectionHeader {
+    margin: 4px 0 0 8px;
     font-family: "Righteous", cursive;
     font-size: 1.3em;
 }
+
+/* Add a New Player */
+#inputAddPlayer {
+    margin: 8px 0 8px 7px;
+    padding: 8px;
+    width: 75%;
+    height: 30px;
+    font-size: 12px;
+    float: left;
+    border: 2px solid var(--color-01);
+    border-radius: 5px;
+}
+#inputAddPlayer:focus {
+    outline: none;
+    border-color: black;
+}
+#submitAddPlayer {
+    margin: 8px 7px 8px 0;
+    width: 20%;
+    height: 30px;
+    font-size: 12px;
+    float: right;
+    border: 2px solid var(--color-01);
+    border-radius: 5px;
+    background-color: var(--color-01);
+    color: white;
+    cursor: pointer;
+}
+
+/* Current Player */
 
 /* Footer */
 footer {
