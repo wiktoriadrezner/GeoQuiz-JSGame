@@ -1,4 +1,4 @@
-let currentPlayer;
+let currentPlayer = "NONE";
 
 function addPlayer(valuePlayer) {
     const playerElement = document.querySelector("#player");
@@ -14,16 +14,22 @@ window.addEventListener("load", () => {
     const playerInputElement = document.querySelector("#inputAddPlayer");
     playerFormElement.addEventListener("submit", (e) => {
         e.preventDefault();
-        /* Check Whether Player Name is Entered */
-        if (!playerInputElement.value) {
-            alert("Please, enter player name");
+        /* Check if the Player has been added */
+        if (currentPlayer === "NONE") {
+            /* Check Whether Player Name is Entered */
+            if (!playerInputElement.value) {
+                alert("Please, enter player name to continue");
+                return;
+            }
+            /* Save Added Player to Current Player */
+            currentPlayer = playerInputElement.value;
+            /* Call Function to Add Player */
+            addPlayer(currentPlayer);
+            /* Clear Player Input */
+            playerInputElement.value = "";
+        } else if (currentPlayer !== "NONE") {
+            alert("The current player has been already added");
             return;
         }
-        /* Call Function to Add Player */
-        addPlayer(playerInputElement.value);
-        currentPlayer = playerInputElement.value;
-        console.log(currentPlayer);
-        /* Clear Player Input */
-        playerInputElement.value = "";
     });
 });
