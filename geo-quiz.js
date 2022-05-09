@@ -1,11 +1,24 @@
 let currentPlayer = "NONE";
 
-function addPlayer(valuePlayer) {
+function actionPlayer(valuePlayer) {
+    /* Define Player Element */
     const playerElement = document.querySelector("#player");
     const playerInputElement = document.createElement("div");
     playerInputElement.classList.add("playerInput");
     playerInputElement.innerText = valuePlayer;
     playerElement.appendChild(playerInputElement);
+    const playerDeleteElement = document.createElement("button");
+    playerDeleteElement.classList.add("playerDelete");
+    playerDeleteElement.innerHTML = "❌";
+    playerElement.appendChild(playerDeleteElement);
+
+    playerDeleteElement.addEventListener("click", () => {
+        /* Delete Current Player */
+        playerElement.removeChild(playerInputElement);
+        playerElement.removeChild(playerDeleteElement);
+        /* Set Current Player to NONE */
+        currentPlayer = "NONE";
+    });
 }
 
 window.addEventListener("load", () => {
@@ -18,17 +31,17 @@ window.addEventListener("load", () => {
         if (currentPlayer === "NONE") {
             /* Check Whether Player Name is Entered */
             if (!playerInputElement.value) {
-                alert("Please, enter player name to continue");
+                alert("Enter player name to continue.");
                 return;
             }
             /* Save Added Player to Current Player */
             currentPlayer = playerInputElement.value;
-            /* Call Function to Add Player */
-            addPlayer(currentPlayer);
+            /* Call Function to Add/Delete Player */
+            actionPlayer(currentPlayer);
             /* Clear Player Input */
             playerInputElement.value = "";
         } else if (currentPlayer !== "NONE") {
-            alert("The current player has been already added");
+            alert("The player has been already added. Delete the current player before adding a new one.");
             return;
         }
     });
