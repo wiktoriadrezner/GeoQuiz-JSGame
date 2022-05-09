@@ -27,7 +27,7 @@ window.addEventListener("load", () => {
     const playerInputElement = document.querySelector("#inputAddPlayer");
     playerFormElement.addEventListener("submit", (e) => {
         e.preventDefault();
-        /* Check if the Player has been added */
+        /* Check if the Player Has Been Added */
         if (currentPlayer === "NONE") {
             /* Check Whether Player Name is Entered */
             if (!playerInputElement.value) {
@@ -41,7 +41,8 @@ window.addEventListener("load", () => {
             /* Clear Player Input */
             playerInputElement.value = "";
         } else if (currentPlayer !== "NONE") {
-            alert("The player has been already added. Delete the current player before adding a new one.");
+            /* Prevent Adding Another Player */
+            alert("The player has been added already. Delete the current player before adding a new one.");
             return;
         }
     });

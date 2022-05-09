@@ -13,29 +13,63 @@
             <div class="subheaderText">Fun and Interactive Way to Test Your Geography Knowledge</div>
         </header>
         <main>
+            <!-- Rules of the Game -->
             <section class="sectionRules">
-                <div class="sectionHeader">Rules of the Game</div>
-                <p class="sectionText">1. Rule.</p>
-                <p class="sectionText">2. Rule.</p>
-                <p class="sectionText">3. Rule.</p>
-                <p class="sectionText">4. Rule.</p>
-                <p class="sectionText">5. Rule.</p>
+                <div class="sectionHeaderFirst">Rules of the Game</div>
+                <!-- Rule nr 1 -->
+                <p class="rulesText">
+                    <span class="boldNumber">1.</span>
+                    You can't change your answer once <span class="boldText">selected</span>.
+                </p>
+                <!-- Rule nr 2 -->
+                <p class="rulesText">
+                    <span class="boldNumber">2.</span>
+                    You have <span class="boldText">10 seconds</span> to answer a question.
+                </p>
+                <!-- Rule nr 3 -->
+                <p class="rulesText">
+                    <span class="boldNumber">3.</span>
+                    For every <span class="boldText">3</span> questions answered correctly, you can purchase a Joker.
+                </p>
+                <!-- Rule nr 4 -->
+                <p class="rulesText">
+                    <span class="boldNumber">4.</span>
+                    Only <span class="boldText">one answer</span> to every question is correct.
+                </p>
+                <!-- Rule nr 5 -->
+                <p class="rulesText">
+                    <span class="boldNumber">5.</span>
+                    Rule.
+                </p>
             </section>
+            <!-- Game Screen -->
             <section class="sectionGame">
-                <div class="sectionHeader">Game Screen</div>
+                <div class="sectionHeaderFirst">Game Screen</div>
             </section>
+            <!-- Player | Score | Jokers -->
             <section class="sectionFeatures">
-                <div class="sectionHeader">Player</div>
+                <!-- Add a New Player -->
+                <div class="sectionHeaderFirst">Player</div>
                 <form id="formAddPlayer">
                     <input id="inputAddPlayer" type="text" minlength="1" maxlength="15" placeholder="Enter Player Name" />
                     <input id="submitAddPlayer" type="submit" value="Add Player" />
                 </form>
+                <!-- Update Current Player -->
                 <div id="player">
-                    <div class="playerIntroduction">Current Player:</div>
+                    <div class="playerIntroduction">Currently Playing:</div>
                     <!-- <div class="playerInput">Player Name</div>
                     <button class="playerDelete">❌</button> -->
                 </div>
-                <div class="sectionHeader">Score | Jokers</div>
+                <div class="sectionHeader">Score</div>
+                <div id="score">
+                    <div class="scoreText">Your Score:</div>
+                    <div class="scoreValue">Score Here</div>
+                </div>
+                <div id="highestScore">
+                    <div class="scoreText">Highest Score:</div>
+                    <div class="highestScoreValue">Highest Score Here</div>
+                </div>
+                <div class="sectionHeader">Jokers</div>
             </section>
         </main>
         <footer>GeoQuiz — 2022 — Jönköping University</footer>
