@@ -83,6 +83,19 @@ section {
 }
 
 /* Current Player */
+#player {
+    margin: 0 0 8px 0;
+    padding: 0 7px 8px 7px;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+.playerIntroduction {
+    margin: 0 8px 0 16px;
+    background-color: transparent;
+    font-family: "Righteous", cursive;
+}
 
 /* Footer */
 footer {
