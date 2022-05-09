@@ -1,16 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"); /* Open Sans */
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap"); /* Righteous */
 @import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap"); /* Hammersmith One */
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"); /* Abril Fatface */
 
 * {
     /* Color Palette */
-    --color-01: #fdff4a; /* Yellow */
+    --color-01: #d7ffc2; /* Herbal Green */
     --color-02: #f8f8e7; /* Grey with a Tint of Yellow */
     --color-03: #b9b9b9; /* Light Grey */
     scroll-behavior: smooth;
     box-sizing: border-box;
     font-family: Open Sans;
     color: black;
+    cursor: default;
     margin: 0;
     padding: 0;
 }
@@ -21,9 +23,11 @@
     color: var(--color-01);
 }
 .boldNumber {
+    font-family: "Hammersmith One", sans-serif;
     font-weight: bold;
 }
 
+/* Background and Body */
 body {
     margin: 0px;
 }
@@ -48,46 +52,56 @@ header {
     font-size: 1em;
 }
 
-/* Main */
+/* Screen Sections */
 main {
     display: grid;
-    grid-template-columns: 1fr 4fr 2fr;
-    grid-column-gap: 1vw;
-    margin: 0 8px 0 8px;
+    grid-template-columns: 3.5fr 1.5fr 1fr;
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+    margin: 0 12px 0 12px;
 }
-
-/* Screen Sections */
 section {
+    padding: 8px;
     height: fit-content;
     background-color: var(--color-03);
 }
-.sectionHeader,
-.sectionHeaderFirst {
-    margin: 8px 0 0 8px;
-    font-family: "Righteous", cursive;
-    font-size: 1.3em;
+.sectionGameScreen {
+    grid-area: 1 / 1 / 7 / 2;
+    height: 450px;
+}
+.sectionPlayer {
+    grid-area: 1 / 2 / 2 / 4;
+}
+.sectionScore {
+    grid-area: 2 / 2 / 3 / 3;
+}
+.sectionJokers {
+    grid-area: 3 / 2 / 4 / 3;
+}
+.sectionRules {
+    grid-area: 2 / 3 / 5 / 4;
+}
+.sectionHeader {
+    margin: 0 0 0 4px;
+    font-family: "Abril Fatface", cursive;
+    font-size: 1.4em;
     color: var(--color-02);
 }
-.sectionHeaderFirst {
-    margin: 4px 0 0 8px;
-}
 
-/* Rules of the Game */
-.rulesText {
-    margin: 8px 8px 0 16px;
-    font-size: 0.95em;
-}
+/* Section 1: Game Screen */
 
+/* Section 2: Player */
 /* Add a New Player */
 #inputAddPlayer {
     margin: 8px 0 8px 7px;
     padding: 8px;
-    width: 75%;
+    width: 76%;
     height: 30px;
     font-size: 12px;
     float: left;
     border: 2px solid white;
     border-radius: 5px;
+    cursor: text;
 }
 #inputAddPlayer:focus {
     outline: none;
@@ -105,13 +119,11 @@ section {
     color: black;
     cursor: pointer;
 }
-
 /* Current Player */
 #player {
-    margin: 0 0 0 0;
-    padding: 0 7px 8px 7px;
+    margin: 0 7px 0 7px;
     width: 100%;
-    height: 30px;
+    height: 25px;
     display: flex;
     align-items: center;
 }
@@ -125,24 +137,48 @@ section {
     font-size: 1.1em;
 }
 .playerDelete {
-    margin: 0 0 0 12px;
+    margin: 0 0 0 8px;
     background-color: transparent;
     border: none;
     cursor: pointer;
     font-size: 12px;
 }
 
-/* Score*/
+/* Section 3: Score */
 #score,
 #highestScore {
     display: flex;
     align-items: center;
+    margin: 4px 0 0 0;
 }
 .scoreText {
     margin: 0 8px 0 23px;
-    background-color: transparent;
     font-family: "Hammersmith One", sans-serif;
     font-size: 1.1em;
+}
+
+/* Section 4: Jokers */
+.jokerHolder {
+    display: flex;
+    align-items: center;
+    margin: 4px 0 0 0;
+}
+.jokersText {
+    margin: 0 8px 0 23px;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.1em;
+}
+#jokerAvailable,
+#jokerPurchased {
+    margin: 0 8px 0 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* Section 5: Rules */
+.rulesText {
+    margin: 4px 0 0 12px;
+    font-size: 0.95em;
 }
 
 /* Footer */
