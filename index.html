@@ -1,98 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>GeoQuiz</title>
-        <link rel="stylesheet" href="geo-quiz.css" />
-    </head>
-    <body class="backgroundImage">
-        <header>
-            <div class="headerText">GeoQuiz</div>
-            <div class="subheaderText">Fun and Interactive Way to Test Your Geography Knowledge</div>
-        </header>
-        <main>
-            <!-- Section 1: Game Screen -->
-            <section class="sectionGameScreen">
-                <div class="sectionHeader">Game Screen</div>
-            </section>
-            <!-- Section 2: Player -->
-            <section class="sectionPlayer">
-                <!-- Add a New Player -->
-                <div class="sectionHeader">Player</div>
-                <form id="formAddPlayer">
-                    <input id="inputAddPlayer" type="text" minlength="1" maxlength="30" placeholder="Enter Player Name" />
-                    <input id="submitAddPlayer" type="submit" value="Add Player" />
-                </form>
-                <!-- Update Current Player -->
-                <div id="player">
-                    <div class="playerIntroduction">Currently Playing:</div>
-                    <!-- <div class="playerInput">Player Name</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GeoQuiz</title>
+    <link rel="stylesheet" href="geo-quiz.css" />
+  </head>
+  <body class="backgroundImage">
+    <header>
+      <div class="headerText">GeoQuiz</div>
+      <div class="subheaderText">
+        Fun and Interactive Way to Test Your Geography Knowledge
+      </div>
+    </header>
+    <main>
+      <!-- Section 1: Game Screen -->
+      <section class="sectionGameScreen">
+        <div class="sectionHeader">Game Screen</div>
+      </section>
+      <!-- Section 2: Player -->
+      <section class="sectionPlayer">
+        <!-- Add a New Player -->
+        <div class="sectionHeader">Player</div>
+        <form id="formAddPlayer">
+          <input
+            id="inputAddPlayer"
+            type="text"
+            minlength="1"
+            maxlength="30"
+            placeholder="Enter Player Name"
+          />
+          <input id="submitAddPlayer" type="submit" value="Add Player" />
+        </form>
+        <!-- Update Current Player -->
+        <div id="player">
+          <div class="playerIntroduction">Currently Playing:</div>
+          <!-- <div class="playerInput">Player Name</div>
                         <button class="playerDelete">❌</button> -->
-                </div>
-            </section>
-            <!-- Section 3: Score -->
-            <section class="sectionScore">
-                <!-- Current Score -->
-                <div class="sectionHeader">Score</div>
-                <div id="score">
-                    <div class="scoreText">Your Score:</div>
-                    <div class="scoreValue">Score Here</div>
-                </div>
-                <!-- Highest Score -->
-                <div id="highestScore">
-                    <div class="scoreText">Highest Score:</div>
-                    <div class="highestScoreValue">Highest Score Here</div>
-                </div>
-            </section>
-            <!-- Section 4: Jokers -->
-            <section class="sectionJokers">
-                <div class="sectionHeader">Jokers</div>
-                <div class="jokerHolder">
-                    <div class="jokersText">Joker Price:</div>
-                    <div class="jokerPrice">100 points</div>
-                </div>
-                <div id="jokersAvailable">
-                    <div class="jokersText">Jokers Available:</div>
-                    <!-- <div id="jokerAvailable">⏱️</div> -->
-                </div>
-                <div id="jokersPurchased">
-                    <div class="jokersText">Jokers Purchased:</div>
-                    <!-- <div id="jokerPurchased">⏱️</div> -->
-                </div>
-            </section>
-            <!-- Section 5: Rules of the Game -->
-            <section class="sectionRules">
-                <div class="sectionHeader">Rules of the Game</div>
-                <!-- Rule nr 1 -->
-                <p class="rulesText">
-                    <span class="boldNumber">1.</span>
-                    Only <span class="boldText">one answer</span> to every question is correct.
-                </p>
-                <!-- Rule nr 2 -->
-                <p class="rulesText">
-                    <span class="boldNumber">2.</span>
-                    You can't change your answer once <span class="boldText">selected</span>.
-                </p>
-                <!-- Rule nr 3 -->
-                <p class="rulesText">
-                    <span class="boldNumber">3.</span>
-                    You have <span class="boldText">10 seconds</span> to answer a question.
-                </p>
-                <!-- Rule nr 4 -->
-                <p class="rulesText">
-                    <span class="boldNumber">4.</span>
-                    For every <span class="boldText">4 questions</span> answered correctly, you can purchase a Joker.
-                </p>
-                <!-- Rule nr 5 -->
-                <p class="rulesText">
-                    <span class="boldNumber">5.</span>
-                    A Joker lenghtens time to answer the question to <span class="boldText">20 seconds</span>.
-                </p>
-            </section>
-        </main>
-        <footer>GeoQuiz — 2022 — Jönköping University</footer>
-        <script src="geo-quiz.js"></script>
-    </body>
+        </div>
+      </section>
+      <!-- Section 3: Score -->
+      <section class="sectionScore">
+        <!-- Current Score -->
+        <div class="sectionHeader">Score</div>
+        <div id="scorePlayer">
+          <div class="scoreText">Your Score:</div>
+          <div class="scorePlayerValue">Score Here</div>
+        </div>
+        <!-- Highest Score -->
+        <div id="scoreHighest">
+          <div class="scoreText">Highest Score:</div>
+          <div class="scoreHighestValue">Highest Score Here</div>
+        </div>
+      </section>
+      <!-- Section 4: Jokers -->
+      <section class="sectionJokers">
+        <div class="sectionHeader">Jokers</div>
+        <div class="jokerHolder">
+          <div class="jokersText">Joker Price:</div>
+          <div class="jokerPrice">100 points</div>
+        </div>
+        <div id="jokersAvailable">
+          <div class="jokersText">Jokers Available:</div>
+          <!-- <div id="jokerAvailable">⏱️</div> -->
+        </div>
+        <div id="jokersPurchased">
+          <div class="jokersText">Jokers Purchased:</div>
+          <!-- <div id="jokerPurchased">⏱️</div> -->
+        </div>
+      </section>
+      <!-- Section 5: Rules of the Game -->
+      <section class="sectionRules">
+        <div class="sectionHeader">Rules of the Game</div>
+        <!-- Rule nr 1 -->
+        <p class="rulesText">
+          <span class="boldNumber">1.</span>
+          Only <span class="boldText">one answer</span> to every question is
+          correct.
+        </p>
+        <!-- Rule nr 2 -->
+        <p class="rulesText">
+          <span class="boldNumber">2.</span>
+          You can't change your answer once
+          <span class="boldText">selected</span>.
+        </p>
+        <!-- Rule nr 3 -->
+        <p class="rulesText">
+          <span class="boldNumber">3.</span>
+          You have <span class="boldText">10 seconds</span> to answer a
+          question.
+        </p>
+        <!-- Rule nr 4 -->
+        <p class="rulesText">
+          <span class="boldNumber">4.</span>
+          For every <span class="boldText">4 questions</span> answered
+          correctly, you can purchase a Joker.
+        </p>
+        <!-- Rule nr 5 -->
+        <p class="rulesText">
+          <span class="boldNumber">5.</span>
+          A Joker lenghtens time to answer the question to
+          <span class="boldText">20 seconds</span>.
+        </p>
+      </section>
+    </main>
+    <footer>GeoQuiz — 2022 — Jönköping University</footer>
+    <script src="geo-quiz.js"></script>
+  </body>
 </html>
