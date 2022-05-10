@@ -22,6 +22,10 @@ function actionPlayer(valuePlayer) {
 
 let scorePlayer = 100;
 let scoreHighest = 3500;
+function actionScore() {
+  const scorePlayerElement = document.querySelector("#scorePlayer");
+  const scoreHighestElement = document.querySelector("#scoreHighest");
+}
 
 //  <!-- Current Score -->
 //         <div class="sectionHeader">Score</div>
