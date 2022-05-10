@@ -1,6 +1,31 @@
+let country01 = "Australia";
+let country02 = "Belgium";
+let country03 = "Poland";
+let countriesGame = [];
+function actionCountry() {
+    /* Country 1 */
+    const country01Element = document.querySelector("#country01");
+    const country01ValueElement = document.createElement("div");
+    country01ValueElement.setAttribute("id", "country01Value");
+    country01ValueElement.innerText = country01;
+    country01Element.appendChild(country01ValueElement);
+    /* Country 2 */
+    const country02Element = document.querySelector("#country02");
+    const country02ValueElement = document.createElement("div");
+    country02ValueElement.setAttribute("id", "country02Value");
+    country02ValueElement.innerText = country02;
+    country02Element.appendChild(country02ValueElement);
+    /* Country 3 */
+    const country03Element = document.querySelector("#country03");
+    const country03ValueElement = document.createElement("div");
+    country03ValueElement.setAttribute("id", "country03Value");
+    country03ValueElement.innerText = country03;
+    country03Element.appendChild(country03ValueElement);
+}
+
 let currentPlayer = "NONE";
 function actionPlayer(valuePlayer) {
-    /* Define Player Element */
+    /* Player */
     const playerElement = document.querySelector("#player");
     const playerInputElement = document.createElement("div");
     playerInputElement.classList.add("playerInput");
@@ -10,9 +35,8 @@ function actionPlayer(valuePlayer) {
     playerDeleteElement.classList.add("playerDelete");
     playerDeleteElement.innerHTML = "❌";
     playerElement.appendChild(playerDeleteElement);
-
+    /* Delete Current Player */
     playerDeleteElement.addEventListener("click", () => {
-        /* Delete Current Player */
         playerElement.removeChild(playerInputElement);
         playerElement.removeChild(playerDeleteElement);
         /* Set Current Player to NONE */
@@ -47,22 +71,20 @@ function actionJoker() {
     jokerAvailableElement.innerHTML = "⏱️";
     /* Add an Available Joker */
     jokersAvailableElement.appendChild(jokerAvailableElement);
-
     /* Jokers Purchased */
     const jokersPurchasedElement = document.querySelector("#jokersPurchased");
     const jokerPurchasedElement = document.createElement("div");
     jokerPurchasedElement.setAttribute("id", "jokerPurchased");
     jokerPurchasedElement.innerHTML = "⏱️";
-
+    /* Purchase an Available Joker */
     jokerAvailableElement.addEventListener("click", () => {
-        /* Purchase an Available Joker */
+        /* Delete Joker From Available List */
         jokersAvailableElement.removeChild(jokerAvailableElement);
         /* Add a Joker to Purchased */
         jokersPurchasedElement.appendChild(jokerPurchasedElement);
     });
 }
 
-let gameCountries = [];
 function actionGame() {}
 
 window.addEventListener("load", () => {
@@ -90,6 +112,9 @@ window.addEventListener("load", () => {
             return;
         }
     });
+
+    /* Set Countries */
+    actionCountry();
 
     /* Update Score */
     actionScore();
