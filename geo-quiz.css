@@ -4,189 +4,208 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"); /* Abril Fatface */
 
 * {
-  /* Color Palette */
-  --color-01: #d7ffc2; /* Herbal Green */
-  --color-02: #f8f8e7; /* Grey with a Tint of Yellow */
-  --color-03: #b9b9b9; /* Light Grey */
-  scroll-behavior: smooth;
-  box-sizing: border-box;
-  font-family: Open Sans;
-  color: black;
-  cursor: default;
-  margin: 0;
-  padding: 0;
+    /* Color Palette */
+    --color-01: #d7ffc2; /* Herbal Green */
+    --color-02: #f8f8e7; /* Grey with a Tint of Yellow */
+    --color-03: #b9b9b9; /* Light Grey */
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    font-family: Open Sans;
+    color: black;
+    cursor: default;
+    margin: 0;
+    padding: 0;
 }
 
 /* Text Accents */
 .boldText {
-  font-weight: bolder;
-  color: var(--color-01);
+    font-weight: bolder;
+    color: var(--color-01);
 }
 .boldNumber {
-  font-family: "Hammersmith One", sans-serif;
-  font-weight: bold;
+    font-family: "Hammersmith One", sans-serif;
+    font-weight: bold;
 }
 
 /* Background and Body */
 body {
-  margin: 0px;
+    margin: 0px;
 }
 .backgroundImage {
-  height: 100vh;
-  background-image: url(world-map.png);
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
+    height: 100vh;
+    background-image: url(world-map.png);
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
 }
 
 /* Header and Subheader */
 header {
-  text-align: center;
-  margin: 0 0 8px 0;
+    text-align: center;
+    margin: 0 0 8px 0;
 }
 .headerText {
-  font-family: "Righteous", cursive;
-  font-size: 4.5em;
+    font-family: "Righteous", cursive;
+    font-size: 4.5em;
 }
 .subheaderText {
-  font-size: 1em;
+    font-size: 1em;
 }
 
 /* Screen Sections */
 main {
-  display: grid;
-  grid-template-columns: 3.5fr 1.5fr 1fr;
-  grid-column-gap: 12px;
-  grid-row-gap: 12px;
-  margin: 0 12px 0 12px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr 1fr;
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+    margin: 0 12px 0 12px;
 }
 section {
-  padding: 8px;
-  height: fit-content;
-  background-color: var(--color-03);
+    padding: 8px;
+    height: fit-content;
+    background-color: var(--color-03);
+}
+.sectionCountries {
+    grid-area: 1 / 1 / 2 / 2;
+}
+.sectionPoints {
+    grid-area: 1 / 2 / 2 / 3;
+}
+.sectionTimeCounter {
+    grid-area: 1 / 3 / 2 / 4;
 }
 .sectionGameScreen {
-  grid-area: 1 / 1 / 7 / 2;
-  height: 450px;
+    grid-area: 2 / 1 / 7 / 4;
+    /* grid-area: 1 / 1 / 7 / 2; */
+    height: 450px;
 }
 .sectionPlayer {
-  grid-area: 1 / 2 / 2 / 4;
+    grid-area: 1 / 4 / 2 / 6;
 }
 .sectionScore {
-  grid-area: 2 / 2 / 3 / 3;
+    grid-area: 2 / 4 / 3 / 5;
 }
 .sectionJokers {
-  grid-area: 3 / 2 / 4 / 3;
+    grid-area: 3 / 4 / 4 / 5;
 }
 .sectionRules {
-  grid-area: 2 / 3 / 5 / 4;
+    grid-area: 2 / 5 / 5 / 6;
 }
 .sectionHeader {
-  margin: 0 0 0 4px;
-  font-family: "Abril Fatface", cursive;
-  font-size: 1.4em;
-  color: var(--color-02);
+    margin: 0 0 0 4px;
+    font-family: "Abril Fatface", cursive;
+    font-size: 1.4em;
+    color: var(--color-02);
 }
 
-/* Section 1: Game Screen */
+/* Section 1: Countries */
+/* Section 2: Points */
+/* Section 3: Time */
+/* Section 4: Game Screen */
+.countrySelection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+}
 
-/* Section 2: Player */
+/* Section 5: Player */
 /* Add a New Player */
 #inputAddPlayer {
-  margin: 8px 0 8px 7px;
-  padding: 8px;
-  width: 76%;
-  height: 30px;
-  font-size: 12px;
-  float: left;
-  border: 2px solid white;
-  border-radius: 5px;
-  cursor: text;
+    margin: 8px 0 8px 7px;
+    padding: 8px;
+    width: 76%;
+    height: 30px;
+    font-size: 12px;
+    float: left;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: text;
 }
 #inputAddPlayer:focus {
-  outline: none;
-  border-color: var(--color-01);
+    outline: none;
+    border-color: var(--color-01);
 }
 #submitAddPlayer {
-  margin: 8px 7px 8px 0;
-  width: 20%;
-  height: 30px;
-  font-size: 12px;
-  float: right;
-  border: 2px solid var(--color-01);
-  border-radius: 5px;
-  background-color: var(--color-01);
-  color: black;
-  cursor: pointer;
+    margin: 8px 7px 8px 0;
+    width: 20%;
+    height: 30px;
+    font-size: 12px;
+    float: right;
+    border: 2px solid var(--color-01);
+    border-radius: 5px;
+    background-color: var(--color-01);
+    color: black;
+    cursor: pointer;
 }
 /* Current Player */
 #player {
-  margin: 0 7px 0 7px;
-  width: 100%;
-  height: 25px;
-  display: flex;
-  align-items: center;
+    margin: 0 7px 0 7px;
+    width: 100%;
+    height: 25px;
+    display: flex;
+    align-items: center;
 }
 .playerIntroduction {
-  margin: 0 8px 0 16px;
-  background-color: transparent;
-  font-family: "Hammersmith One", sans-serif;
-  font-size: 1.1em;
+    margin: 0 8px 0 16px;
+    background-color: transparent;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.1em;
 }
 .playerInput {
-  font-size: 1.1em;
+    font-size: 1.1em;
 }
 .playerDelete {
-  margin: 0 0 0 8px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
+    margin: 0 0 0 8px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
 }
 
-/* Section 3: Score */
+/* Section 6: Score */
 #scorePlayer,
 #scoreHighest {
-  display: flex;
-  align-items: center;
-  margin: 4px 0 0 0;
+    display: flex;
+    align-items: center;
+    margin: 4px 0 0 0;
 }
 .scoreText {
-  margin: 0 8px 0 23px;
-  font-family: "Hammersmith One", sans-serif;
-  font-size: 1.1em;
+    margin: 0 8px 0 23px;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.1em;
 }
 
-/* Section 4: Jokers */
+/* Section 7: Jokers */
 #jokersAvailable,
 #jokersPurchased,
 .jokerHolder {
-  display: flex;
-  align-items: center;
-  margin: 4px 0 0 0;
+    display: flex;
+    align-items: center;
+    margin: 4px 0 0 0;
 }
 .jokersText {
-  margin: 0 8px 0 23px;
-  font-family: "Hammersmith One", sans-serif;
-  font-size: 1.1em;
+    margin: 0 8px 0 23px;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.1em;
 }
 #jokerAvailable,
 #jokerPurchased {
-  margin: 0 8px 0 0;
-  font-size: 13px;
-  cursor: pointer;
+    margin: 0 8px 0 0;
+    font-size: 13px;
+    cursor: pointer;
 }
 
-/* Section 5: Rules */
+/* Section 8: Rules */
 .rulesText {
-  margin: 4px 0 0 12px;
-  font-size: 0.95em;
+    margin: 4px 0 0 12px;
+    font-size: 0.95em;
 }
 
 /* Footer */
 footer {
-  position: fixed;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
+    position: fixed;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
 }
