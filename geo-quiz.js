@@ -37,18 +37,6 @@ function actionScore() {
   scoreHighestElement.appendChild(scoreHighestValueElement);
 }
 
-//  <!-- Current Score -->
-//         <div class="sectionHeader">Score</div>
-//         <div id="scorePlayer">
-//           <div class="scoreText">Your Score:</div>
-//           <div class="scorePlayerValue">Score Here</div>
-//         </div>
-//         <!-- Highest Score -->
-//         <div id="scoreHighest">
-//           <div class="scoreText">Highest Score:</div>
-//           <div class="scoreHighestValue">Highest Score Here</div>
-//         </div>
-
 let answersCorrect = 0;
 let answersWrong = 0;
 function actionJoker() {
