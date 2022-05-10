@@ -26,9 +26,14 @@ function actionScore() {
   const scorePlayerElement = document.querySelector("#scorePlayer");
   const scorePlayerValueElement = document.createElement("div");
   scorePlayerValueElement.classList.add("scorePlayerValue");
+  scorePlayerValueElement.innerText = scorePlayer;
+  scorePlayerElement.appendChild(scorePlayerValueElement);
+
   const scoreHighestElement = document.querySelector("#scoreHighest");
   const scoreHighestValueElement = document.createElement("div");
   scoreHighestValueElement.classList.add("scoreHighestValue");
+  scoreHighestValueElement.innerText = scoreHighest;
+  scoreHighestElement.appendChild(scoreHighestValueElement);
 }
 
 //  <!-- Current Score -->
