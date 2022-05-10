@@ -24,7 +24,9 @@ let scorePlayer = 100;
 let scoreHighest = 3500;
 function actionScore() {
   const scorePlayerElement = document.querySelector("#scorePlayer");
+  const scorePlayerValueElement = document.createElement("div");
   const scoreHighestElement = document.querySelector("#scoreHighest");
+  const scoreHighestValueElement = document.createElement("div");
 }
 
 //  <!-- Current Score -->
