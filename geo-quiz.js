@@ -23,12 +23,13 @@ function actionPlayer(valuePlayer) {
 let scorePlayer = 100;
 let scoreHighest = 3500;
 function actionScore() {
+  /* Player Score */
   const scorePlayerElement = document.querySelector("#scorePlayer");
   const scorePlayerValueElement = document.createElement("div");
   scorePlayerValueElement.classList.add("scorePlayerValue");
   scorePlayerValueElement.innerText = scorePlayer;
   scorePlayerElement.appendChild(scorePlayerValueElement);
-
+  /* Highest Score */
   const scoreHighestElement = document.querySelector("#scoreHighest");
   const scoreHighestValueElement = document.createElement("div");
   scoreHighestValueElement.classList.add("scoreHighestValue");
@@ -100,6 +101,9 @@ window.addEventListener("load", () => {
       return;
     }
   });
+
+  /* Score */
+  actionScore();
 
   /* Joker */
   for (i = 0; i < 15; i++) {
