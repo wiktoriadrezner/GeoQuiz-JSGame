@@ -1,26 +1,33 @@
-let country01 = "Australia";
-let country02 = "Belgium";
-let country03 = "Poland";
-let countriesGame = [];
+// let country01 = "Australia";
+// let country02 = "Belgium";
+// let country03 = "Poland";
+let indexSelected = 0;
+let countriesSelected = [];
 function actionCountry() {
     /* Country 1 */
-    const country01Element = document.querySelector("#country01");
-    const country01ValueElement = document.createElement("div");
-    country01ValueElement.setAttribute("id", "country01Value");
-    country01ValueElement.innerText = country01;
-    country01Element.appendChild(country01ValueElement);
+    if (indexSelected === 1) {
+        const country01Element = document.querySelector("#country01");
+        let country01ValueElement = document.createElement("div");
+        country01ValueElement.setAttribute("id", "country01Value");
+        country01ValueElement.innerText = countriesSelected[0];
+        country01Element.appendChild(country01ValueElement);
+    }
     /* Country 2 */
-    const country02Element = document.querySelector("#country02");
-    const country02ValueElement = document.createElement("div");
-    country02ValueElement.setAttribute("id", "country02Value");
-    country02ValueElement.innerText = country02;
-    country02Element.appendChild(country02ValueElement);
+    if (indexSelected === 2) {
+        const country02Element = document.querySelector("#country02");
+        let country02ValueElement = document.createElement("div");
+        country02ValueElement.setAttribute("id", "country02Value");
+        country02ValueElement.innerText = countriesSelected[1];
+        country02Element.appendChild(country02ValueElement);
+    }
     /* Country 3 */
-    const country03Element = document.querySelector("#country03");
-    const country03ValueElement = document.createElement("div");
-    country03ValueElement.setAttribute("id", "country03Value");
-    country03ValueElement.innerText = country03;
-    country03Element.appendChild(country03ValueElement);
+    if (indexSelected === 3) {
+        const country03Element = document.querySelector("#country03");
+        let country03ValueElement = document.createElement("div");
+        country03ValueElement.setAttribute("id", "country03Value");
+        country03ValueElement.innerText = countriesSelected[2];
+        country03Element.appendChild(country03ValueElement);
+    }
 }
 
 let currentPlayer = "NONE";
@@ -85,6 +92,49 @@ function actionJoker() {
     });
 }
 
+function gameCountryChoice() {
+    /* Select 3 Countries */
+    const countryNameElement = document.querySelectorAll(".countryName");
+    for (let i = 0; i < countryNameElement.length; i++) {
+        countryNameElement[i].addEventListener("click", () => {
+            /* Select Only Three Elements */
+            if (indexSelected !== 3) {
+                countryNameElement[i].classList.add("countryNameSelected");
+                countriesSelected[indexSelected] = countryNameElement[i].innerText;
+                indexSelected++;
+                /* Set Countries Based on Selection */
+                actionCountry();
+            }
+        });
+    }
+}
+// console.log(countryNameElement[i]);
+
+// console.log(countryNameElement.length);
+// countryNameElement.addEventListener("click", () => {
+//     console.log("click");
+// });
+
+{
+    /* <div class="countrySelection">
+                    <div class="countryName">Azerbaijan</div>
+                    <div class="countryName">Australia</div>
+                    <div class="countryName">Belarus</div>
+                    <div class="countryName">Bulgaria</div>
+                    <div class="countryName">Canada</div>
+                    <div class="countryName">Colombia</div>
+                    <div class="countryName">Denmark</div>
+                    <div class="countryName">Ecuador</div>
+                    <div class="countryName">Finland</div>
+                    <div class="countryName">Ghana</div>
+                    <div class="countryName">Iceland</div>
+                    <div class="countryName">Kazakhstan</div>
+                    <div class="countryName">Lithuania</div>
+                    <div class="countryName">Moldova</div>
+                    <div class="countryName">Pakistan</div>
+                </div> */
+}
+
 function actionGame() {}
 
 window.addEventListener("load", () => {
@@ -113,8 +163,7 @@ window.addEventListener("load", () => {
         }
     });
 
-    /* Set Countries */
-    actionCountry();
+    gameCountryChoice();
 
     /* Update Score */
     actionScore();
