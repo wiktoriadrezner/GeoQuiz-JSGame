@@ -15,15 +15,16 @@
         <main>
             <!-- Section 1: Time Counter -->
             <section class="sectionTimeCounter">
-                <div class="sectionHeader">Time</div>
+                <div class="sectionHeader">Time Left</div>
             </section>
             <!-- Section 2: Points -->
             <section class="sectionPoints">
-                <div class="sectionHeader">Points</div>
+                <div class="sectionHeader">Your Points</div>
+                <div id="points">1500</div>
             </section>
             <!-- Section 3: Countries -->
             <section class="sectionCountriesList">
-                <div class="sectionHeader">Countries</div>
+                <div class="sectionHeader">Countries Selected</div>
                 <div id="country01">
                     <div class="countriesListText">1.</div>
                     <!-- <div id="country01Value">Country Name Here</div> -->
@@ -38,31 +39,33 @@
                 </div>
             </section>
             <!-- Section 4: Game Screen -->
-            <section class="sectionGameScreen">
-                <!-- Select Countries -->
-                <div class="sectionHeader">Select / 3 / Countries</div>
-                <p class="countrySelectionText">
-                    <span class="countrySelectionTextBold">ATTENTION:</span>
-                    Once selected a country, you can't change your selection.
-                </p>
-                <div class="countrySelection">
-                    <div class="countryName">Azerbaijan</div>
-                    <div class="countryName">Australia</div>
-                    <div class="countryName">Belarus</div>
-                    <div class="countryName">Bulgaria</div>
-                    <div class="countryName">Canada</div>
-                    <div class="countryName">Colombia</div>
-                    <div class="countryName">Denmark</div>
-                    <div class="countryName">Ecuador</div>
-                    <div class="countryName">Finland</div>
-                    <div class="countryName">Ghana</div>
-                    <div class="countryName">Iceland</div>
-                    <div class="countryName">Kazakhstan</div>
-                    <div class="countryName">Lithuania</div>
-                    <div class="countryName">Moldova</div>
-                    <div class="countryName">Pakistan</div>
-                </div>
-                <div id="buttonContinue">Click to Continue</div>
+            <section class="sectionGame">
+                <!-- Step 1: Select Countries -->
+                <section id="sectionGameStep01">
+                    <!-- <div class="sectionHeader">Select / 3 / Countries</div>
+                    <div class="countrySelectionTextBold">ATTENTION:</div>
+                    <div class="countrySelectionText">Once selected a country, you can't change your selection.</div>
+                    <div class="countrySelection">
+                        <div class="countryName">Azerbaijan</div>
+                        <div class="countryName">Australia</div>
+                        <div class="countryName">Belarus</div>
+                        <div class="countryName">Bulgaria</div>
+                        <div class="countryName">Canada</div>
+                        <div class="countryName">Colombia</div>
+                        <div class="countryName">Denmark</div>
+                        <div class="countryName">Ecuador</div>
+                        <div class="countryName">Finland</div>
+                        <div class="countryName">Ghana</div>
+                        <div class="countryName">Iceland</div>
+                        <div class="countryName">Kazakhstan</div>
+                        <div class="countryName">Lithuania</div>
+                        <div class="countryName">Moldova</div>
+                        <div class="countryName">Pakistan</div>
+                    </div>
+                    <div id="buttonContinue" class="buttonContinueLocked">Click to Continue</div> -->
+                </section>
+                <!-- Step 2: Quiz -->
+                <section class="sectionGameStep02"></section>
             </section>
             <!-- Section 5: Player -->
             <section class="sectionPlayer">

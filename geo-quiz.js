@@ -89,9 +89,111 @@ function actionJoker() {
     });
 }
 
+/* Step 1: Select Countries */
 function gameStep01() {
-    /* Button to Continue */
-    const buttonContinueElement = document.querySelector("#buttonContinue");
+    /* Append HTML Elements to Section */
+    const sectionGameStep01Element = document.querySelector("#sectionGameStep01");
+    /* HTML Element: Header */
+    const sectionHeaderElement = document.createElement("div");
+    sectionHeaderElement.classList.add("sectionHeader");
+    sectionHeaderElement.innerHTML = "Select / 3 / Countries";
+    sectionGameStep01Element.appendChild(sectionHeaderElement);
+    /* HTML Element: Country Selection — Text */
+    const countrySelectionTextBoldElement = document.createElement("div");
+    countrySelectionTextBoldElement.classList.add("countrySelectionTextBold");
+    countrySelectionTextBoldElement.innerHTML = "ATTENTION:";
+    sectionGameStep01Element.appendChild(countrySelectionTextBoldElement);
+    /* HTML Element: Country Selection — Text Bold */
+    const countrySelectionTextElement = document.createElement("div");
+    countrySelectionTextElement.classList.add("countrySelectionText");
+    countrySelectionTextElement.innerHTML = "Once selected a country, you can't change your selection.";
+    sectionGameStep01Element.appendChild(countrySelectionTextElement);
+    /* HTML Element: Country Selection */
+    const countrySelectionElement = document.createElement("div");
+    countrySelectionElement.classList.add("countrySelection");
+    sectionGameStep01Element.appendChild(countrySelectionElement);
+    /* HTML Element: Country — Azerbaijan */
+    const countryAzerbaijanElement = document.createElement("div");
+    countryAzerbaijanElement.classList.add("countryName");
+    countryAzerbaijanElement.innerHTML = "Azerbaijan";
+    countrySelectionElement.appendChild(countryAzerbaijanElement);
+    /* HTML Element: Country — Australia */
+    const countryAustraliaElement = document.createElement("div");
+    countryAustraliaElement.classList.add("countryName");
+    countryAustraliaElement.innerHTML = "Australia";
+    countrySelectionElement.appendChild(countryAustraliaElement);
+    /* HTML Element: Country — Belarus */
+    const countryBelarusElement = document.createElement("div");
+    countryBelarusElement.classList.add("countryName");
+    countryBelarusElement.innerHTML = "Belarus";
+    countrySelectionElement.appendChild(countryBelarusElement);
+    /* HTML Element: Country — Bulgaria */
+    const countryBulgariaElement = document.createElement("div");
+    countryBulgariaElement.classList.add("countryName");
+    countryBulgariaElement.innerHTML = "Bulgaria";
+    countrySelectionElement.appendChild(countryBulgariaElement);
+    /* HTML Element: Country — Canada */
+    const countryCanadaElement = document.createElement("div");
+    countryCanadaElement.classList.add("countryName");
+    countryCanadaElement.innerHTML = "Canada";
+    countrySelectionElement.appendChild(countryCanadaElement);
+    /* HTML Element: Country — Colombia */
+    const countryColombiaElement = document.createElement("div");
+    countryColombiaElement.classList.add("countryName");
+    countryColombiaElement.innerHTML = "Colombia";
+    countrySelectionElement.appendChild(countryColombiaElement);
+    /* HTML Element: Country — Denmark */
+    const countryDenmarkElement = document.createElement("div");
+    countryDenmarkElement.classList.add("countryName");
+    countryDenmarkElement.innerHTML = "Denmark";
+    countrySelectionElement.appendChild(countryDenmarkElement);
+    /* HTML Element: Country — Ecuador */
+    const countryEcuadorElement = document.createElement("div");
+    countryEcuadorElement.classList.add("countryName");
+    countryEcuadorElement.innerHTML = "Ecuador";
+    countrySelectionElement.appendChild(countryEcuadorElement);
+    /* HTML Element: Country — Finland */
+    const countryFinlandElement = document.createElement("div");
+    countryFinlandElement.classList.add("countryName");
+    countryFinlandElement.innerHTML = "Finland";
+    countrySelectionElement.appendChild(countryFinlandElement);
+    /* HTML Element: Country — Ghana */
+    const countryGhanaElement = document.createElement("div");
+    countryGhanaElement.classList.add("countryName");
+    countryGhanaElement.innerHTML = "Ghana";
+    countrySelectionElement.appendChild(countryGhanaElement);
+    /* HTML Element: Country — Iceland */
+    const countryIcelandElement = document.createElement("div");
+    countryIcelandElement.classList.add("countryName");
+    countryIcelandElement.innerHTML = "Iceland";
+    countrySelectionElement.appendChild(countryIcelandElement);
+    /* HTML Element: Country — Kazakhstan */
+    const countryKazakhstanElement = document.createElement("div");
+    countryKazakhstanElement.classList.add("countryName");
+    countryKazakhstanElement.innerHTML = "Kazakhstan";
+    countrySelectionElement.appendChild(countryKazakhstanElement);
+    /* HTML Element: Country — Lithuania */
+    const countryLithuaniaElement = document.createElement("div");
+    countryLithuaniaElement.classList.add("countryName");
+    countryLithuaniaElement.innerHTML = "Lithuania";
+    countrySelectionElement.appendChild(countryLithuaniaElement);
+    /* HTML Element: Country — Moldova */
+    const countryMoldovaElement = document.createElement("div");
+    countryMoldovaElement.classList.add("countryName");
+    countryMoldovaElement.innerHTML = "Moldova";
+    countrySelectionElement.appendChild(countryMoldovaElement);
+    /* HTML Element: Country — Pakistan */
+    const countryPakistanElement = document.createElement("div");
+    countryPakistanElement.classList.add("countryName");
+    countryPakistanElement.innerHTML = "Pakistan";
+    countrySelectionElement.appendChild(countryPakistanElement);
+    /* HTML Element: Button to Continue */
+    const buttonContinueElement = document.createElement("div");
+    buttonContinueElement.setAttribute("id", "buttonContinue");
+    buttonContinueElement.classList.add("buttonContinueLocked");
+    buttonContinueElement.innerHTML = "Click to Continue";
+    sectionGameStep01Element.appendChild(buttonContinueElement);
+
     /* Loop Through 15 Countries */
     const countryNameElement = document.querySelectorAll(".countryName");
     for (let i = 0; i < countryNameElement.length; i++) {
@@ -115,21 +217,28 @@ function gameStep01() {
                             countryNameElement[i].classList.add("countryNameLocked");
                         }
                     }
+                    buttonContinueElement.classList.add("buttonContinueUnlocked");
                 }
             }
         });
     }
+    /* Proceed To Quiz */
     buttonContinueElement.addEventListener("click", () => {
-        if (indexSelected === 3) {
-            console.log("button works");
+        if (indexSelected !== 3) {
+            alert("Before proceeding to game, please select the countries.");
+            return;
+        } else {
+            gameStep02();
         }
     });
 }
+function gameStep02() {}
 
 function game() {
-    /* Step 1: Select 3 Countries */
+    /* Step 1: Select Countries */
     gameStep01();
-    /* Step 2: Begin Quiz */
+    /* Step 2: Quiz */
+    /* Step 3: Results */
 }
 
 window.addEventListener("load", () => {
@@ -158,6 +267,7 @@ window.addEventListener("load", () => {
         }
     });
 
+    /* Start Game */
     game();
 
     /* Update Score */
