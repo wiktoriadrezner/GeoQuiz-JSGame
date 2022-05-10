@@ -1,6 +1,3 @@
-// let country01 = "Australia";
-// let country02 = "Belgium";
-// let country03 = "Poland";
 let indexSelected = 0;
 let countriesSelected = [];
 function actionCountry() {
@@ -92,50 +89,48 @@ function actionJoker() {
     });
 }
 
-function gameCountryChoice() {
-    /* Select 3 Countries */
+function gameStep01() {
+    /* Button to Continue */
+    const buttonContinueElement = document.querySelector("#buttonContinue");
+    /* Loop Through 15 Countries */
     const countryNameElement = document.querySelectorAll(".countryName");
     for (let i = 0; i < countryNameElement.length; i++) {
         countryNameElement[i].addEventListener("click", () => {
-            /* Select Only Three Elements */
-            if (indexSelected !== 3) {
+            if (currentPlayer === "NONE") {
+                /* Do Not Proceed If Current Player is Not Selected */
+                alert("Before choosing the countries for the game, please add the player.");
+                return;
+            } else if (indexSelected !== 3) {
+                /* Select Only Three Elements */
                 countryNameElement[i].classList.add("countryNameSelected");
                 countriesSelected[indexSelected] = countryNameElement[i].innerText;
                 indexSelected++;
-                /* Set Countries Based on Selection */
+                /* Set Countries List Based on Selection */
                 actionCountry();
+                /* If Three Countries Are Selected, Lock the Remaining Countries */
+                if (indexSelected === 3) {
+                    for (let i = 0; i < countryNameElement.length; i++) {
+                        if (countryNameElement[i].classList.contains("countryNameSelected")) continue;
+                        else {
+                            countryNameElement[i].classList.add("countryNameLocked");
+                        }
+                    }
+                }
             }
         });
     }
-}
-// console.log(countryNameElement[i]);
-
-// console.log(countryNameElement.length);
-// countryNameElement.addEventListener("click", () => {
-//     console.log("click");
-// });
-
-{
-    /* <div class="countrySelection">
-                    <div class="countryName">Azerbaijan</div>
-                    <div class="countryName">Australia</div>
-                    <div class="countryName">Belarus</div>
-                    <div class="countryName">Bulgaria</div>
-                    <div class="countryName">Canada</div>
-                    <div class="countryName">Colombia</div>
-                    <div class="countryName">Denmark</div>
-                    <div class="countryName">Ecuador</div>
-                    <div class="countryName">Finland</div>
-                    <div class="countryName">Ghana</div>
-                    <div class="countryName">Iceland</div>
-                    <div class="countryName">Kazakhstan</div>
-                    <div class="countryName">Lithuania</div>
-                    <div class="countryName">Moldova</div>
-                    <div class="countryName">Pakistan</div>
-                </div> */
+    buttonContinueElement.addEventListener("click", () => {
+        if (indexSelected === 3) {
+            console.log("button works");
+        }
+    });
 }
 
-function actionGame() {}
+function game() {
+    /* Step 1: Select 3 Countries */
+    gameStep01();
+    /* Step 2: Begin Quiz */
+}
 
 window.addEventListener("load", () => {
     /* Add a New Player */
@@ -163,7 +158,7 @@ window.addEventListener("load", () => {
         }
     });
 
-    gameCountryChoice();
+    game();
 
     /* Update Score */
     actionScore();

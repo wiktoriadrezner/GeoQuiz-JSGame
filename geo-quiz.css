@@ -8,7 +8,8 @@
     --color-01: #d7ffc2; /* Herbal Green */
     --color-02: #f8f8e7; /* Grey with a Tint of Yellow */
     --color-03: #b9b9b9; /* Light Grey */
-    --color-04: #ffaeaa; /* Light Red */
+    --color-04: #ffaeaa; /* Light Red (Selected Content) */
+    --color-05: #717171; /* Dark Grey (Locked Content) */
     scroll-behavior: smooth;
     box-sizing: border-box;
     font-family: Open Sans;
@@ -130,8 +131,10 @@ section {
 .countrySelectionTextBold {
     font-family: "Hammersmith One", sans-serif;
 }
+/* Change Country Colors Based On State */
 .countryName,
-.countryNameSelected {
+.countryNameSelected,
+.countryNameLocked {
     margin: 5px;
     padding: 8px;
     text-align: center;
@@ -146,6 +149,12 @@ section {
     background-color: var(--color-04);
     border: 2px solid white;
 }
+.countryNameLocked {
+    pointer-events: none; /* Select Country Once */
+    background-color: var(--color-05);
+    border: 2px solid white;
+}
+
 #buttonContinue {
     margin: 15px 5px 5px 5px;
     padding: 8px;
