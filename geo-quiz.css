@@ -158,6 +158,8 @@ section {
 }
 
 /* Section 4: Jokers */
+#jokersAvailable,
+#jokersPurchased,
 .jokerHolder {
     display: flex;
     align-items: center;
@@ -171,7 +173,7 @@ section {
 #jokerAvailable,
 #jokerPurchased {
     margin: 0 8px 0 0;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
 }
 

@@ -1,5 +1,9 @@
-let currentPlayer = "NONE";
+let test = 0;
 
+let answersCorrect = 0;
+let answersWrong = 0;
+
+let currentPlayer = "NONE";
 function actionPlayer(valuePlayer) {
     /* Define Player Element */
     const playerElement = document.querySelector("#player");
@@ -18,6 +22,29 @@ function actionPlayer(valuePlayer) {
         playerElement.removeChild(playerDeleteElement);
         /* Set Current Player to NONE */
         currentPlayer = "NONE";
+    });
+}
+
+function actionJoker() {
+    /* Jokers Available */
+    const jokersAvailableElement = document.querySelector("#jokersAvailable");
+    const jokerAvailableElement = document.createElement("div");
+    jokerAvailableElement.setAttribute("id", "jokerAvailable");
+    jokerAvailableElement.innerHTML = "⏱️";
+    /* Add an Available Joker */
+    jokersAvailableElement.appendChild(jokerAvailableElement);
+
+    /* Jokers Purchased */
+    const jokersPurchasedElement = document.querySelector("#jokersPurchased");
+    const jokerPurchasedElement = document.createElement("div");
+    jokerPurchasedElement.setAttribute("id", "jokerPurchased");
+    jokerPurchasedElement.innerHTML = "⏱️";
+
+    jokerAvailableElement.addEventListener("click", () => {
+        /* Purchase an Available Joker */
+        jokersAvailableElement.removeChild(jokerAvailableElement);
+        /* Add a Joker to Purchased */
+        jokersPurchasedElement.appendChild(jokerPurchasedElement);
     });
 }
 
@@ -46,4 +73,13 @@ window.addEventListener("load", () => {
             return;
         }
     });
+
+    /* Joker */
+    for (i = 0; i < 15; i++) {
+        /* Add a Joker if Player Answered 4/8/12 Questions Correctly */
+        if ([4, 8, 12].includes(answersCorrect)) {
+            actionJoker();
+        }
+        answersCorrect++;
+    }
 });
