@@ -1,3 +1,25 @@
+/* Answer Key
+Country — Capital City — Flag — Famous Food - Population */
+
+/* Azerbaijan (1) Australia (2) Belarus (3) Bulgaria (4) Canada (5)
+Colombia (6) Denmark (7) Ecuador (8) Finland (9) Ghana (10)
+Iceland (11) Kazakhstan (12) Lithuania (13) Moldova (14) Pakistan (15) */
+let answerKey = [];
+
+let x1 = {
+    country: "Azerbaijan",
+    capital: "Baku",
+    flag: "🇦🇿",
+    food: "Plov",
+    population: "10.11 million",
+};
+
+let points = 0;
+function actionPoints() {
+    const pointsElement = document.querySelector("#points");
+    pointsElement.innerText = points;
+}
+
 let indexSelected = 0;
 let countriesSelected = [];
 function actionCountry() {
@@ -65,8 +87,6 @@ function actionScore() {
     scoreHighestElement.appendChild(scoreHighestValueElement);
 }
 
-let answersCorrect = 0;
-let answersWrong = 0;
 function actionJoker() {
     /* Jokers Available */
     const jokersAvailableElement = document.querySelector("#jokersAvailable");
@@ -92,7 +112,9 @@ function actionJoker() {
 /* Step 1: Select Countries */
 function gameStep01() {
     /* Append HTML Elements to Section */
+    const sectionGameElement = document.querySelector(".sectionGame");
     const sectionGameStep01Element = document.querySelector("#sectionGameStep01");
+    sectionGameElement.appendChild(sectionGameStep01Element);
     /* HTML Element: Header */
     const sectionHeaderElement = document.createElement("div");
     sectionHeaderElement.classList.add("sectionHeader");
@@ -222,24 +244,26 @@ function gameStep01() {
             }
         });
     }
+
     /* Proceed To Quiz */
     buttonContinueElement.addEventListener("click", () => {
         if (indexSelected !== 3) {
             alert("Before proceeding to game, please select the countries.");
             return;
         } else {
+            sectionGameElement.removeChild(sectionGameStep01Element);
             gameStep02();
         }
     });
 }
+
+/* Step 2: Quiz */
+let answersCorrect = 0;
+let answersWrong = 0;
 function gameStep02() {}
 
-function game() {
-    /* Step 1: Select Countries */
-    gameStep01();
-    /* Step 2: Quiz */
-    /* Step 3: Results */
-}
+/* Step 3: Results */
+function gameStep03() {}
 
 window.addEventListener("load", () => {
     /* Add a New Player */
@@ -267,11 +291,14 @@ window.addEventListener("load", () => {
         }
     });
 
-    /* Start Game */
-    game();
+    /* Begin Game: Choose Countries */
+    gameStep01();
 
     /* Update Score */
     actionScore();
+
+    /* Display Current Points */
+    actionPoints();
 
     /* Joker */
     for (i = 0; i < 15; i++) {
