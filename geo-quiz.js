@@ -78,6 +78,30 @@ let x9 = {
   population: "5.5 million",
 };
 
+let x10 = {
+  country: "Ghana",
+  capital: "Accra",
+  flag: "🇬🇭",
+  food: "Fufu",
+  population: "31.07 million.",
+};
+
+let x11 = {
+  country: "Iceland",
+  capital: "Reykjavik",
+  flag: "🇮🇸",
+  food: "Skyr",
+  population: "366 425",
+};
+
+let x12 = {
+  country: "Kazakhstan",
+  capital: "Nur-Sultan",
+  flag: "🇰🇿",
+  food: "Beschbarmaq",
+  population: "18.75 million",
+};
+
 let points = 0;
 function actionPoints() {
   const pointsElement = document.querySelector("#points");
