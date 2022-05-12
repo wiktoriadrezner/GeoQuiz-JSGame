@@ -38,6 +38,46 @@ let x4 = {
   population: "6.5 million",
 };
 
+let x5 = {
+  country: "Canada",
+  capital: "Ottawa",
+  flag: "🇨🇦",
+  food: "Poutine",
+  population: "38.01 million",
+};
+
+let x6 = {
+  country: "Colombia",
+  capital: "Bogotá",
+  flag: "🇨🇴",
+  food: "Ajiaco Santaferena",
+  population: "50.88 million",
+};
+
+let x7 = {
+  country: "Denmark",
+  capital: "Copenhagen",
+  flag: "🇩🇰",
+  food: "Smørrebrød",
+  population: "5.8 million",
+};
+
+let x8 = {
+  country: "Ecuador",
+  capital: "Quito",
+  flag: "🇪🇨",
+  food: "Cuy picante",
+  population: "17.64 million",
+};
+
+let x9 = {
+  country: "Finland",
+  capital: "Helsinki",
+  flag: "🇫🇮",
+  food: "Karjalanpiirakka",
+  population: "5.5 million",
+};
+
 let points = 0;
 function actionPoints() {
   const pointsElement = document.querySelector("#points");
