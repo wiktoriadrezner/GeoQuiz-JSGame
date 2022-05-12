@@ -102,6 +102,30 @@ let x12 = {
   population: "18.75 million",
 };
 
+let x13 = {
+  country: "Lithuania",
+  capital: "Vilnius",
+  flag: "🇱🇹",
+  food: "Cepelinai",
+  population: "2.7 million",
+};
+
+let x14 = {
+  country: "Moldova",
+  capital: "Chișinău",
+  flag: "🇲🇩",
+  food: "Mamaliga",
+  population: "2.6 million",
+};
+
+let x15 = {
+  country: "Pakistan",
+  capital: "Islamabad",
+  flag: "🇵🇰",
+  food: "Nihari",
+  population: "220.9 million",
+};
+
 let points = 0;
 function actionPoints() {
   const pointsElement = document.querySelector("#points");
