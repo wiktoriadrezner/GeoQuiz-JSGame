@@ -10,6 +10,7 @@
     --color-03: #b9b9b9; /* Light Grey */
     --color-04: #ffaeaa; /* Light Red (Selected Content) */
     --color-05: #717171; /* Dark Grey (Locked Content) */
+    --color-06: #e4ecea; /* Light Grey with a Tint of Blue */
     scroll-behavior: smooth;
     box-sizing: border-box;
     font-family: Open Sans;
@@ -22,7 +23,7 @@
 /* Text Accents */
 .boldText {
     font-weight: bolder;
-    color: var(--color-01);
+    color: var(--color-06);
 }
 .boldNumber {
     font-family: "Hammersmith One", sans-serif;
@@ -110,6 +111,7 @@ section {
 .sectionGame {
     grid-area: 2 / 1 / 7 / 4;
 }
+
 /* Step 1: Select Countries */
 #sectionGameStep01 {
     padding: 0;
@@ -131,7 +133,7 @@ section {
     font-size: 1.1em;
     display: inline;
 }
-/* Change Country Colors Based On State */
+/* Step 1: Change Country Colors Based On State */
 .countryName,
 .countryNameSelected,
 .countryNameLocked {
@@ -154,22 +156,8 @@ section {
     background-color: var(--color-05);
     border: 2px solid white;
 }
-/* Button to Proceed to Game */
-.buttonContinueLocked {
-    margin: 15px 5px 5px 5px;
-    padding: 8px;
-    width: 25%;
-    background-color: var(--color-02);
-    border-radius: 5px;
-    cursor: pointer;
-    float: right;
-    text-align: center;
-}
-.buttonContinueUnlocked {
-    background-color: var(--color-01);
-}
 
-/* Step 2: Quiz */
+/* Step 2: Quiz Parameters */
 #sectionGameStep02 {
     padding: 0;
 }
@@ -185,17 +173,17 @@ section {
 .parameterTextBold {
     margin: 0 8px 0 23px;
     font-family: "Hammersmith One", sans-serif;
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
-/* 3 Parameters: Question Number, Country, Topic */
 #parameterQuestionNr,
 #parameterCountry,
 #parameterTopic {
     font-size: 1.15em;
 }
+/* Step 2: Question and Answers */
 .quizQuestion {
     text-align: center;
-    margin: 24px 0 12px 0;
+    margin: 6px 0 16px 0;
     font-size: 1.2em;
 }
 .quizAnswers {
@@ -211,8 +199,8 @@ section {
 #quizAnswer03,
 #quizAnswer04 {
     margin: 0 24px 0 24px;
-    padding: 10px;
-    background-color: var(--color-02);
+    padding: 20px;
+    background-color: var(--color-06);
     border: 2px solid white;
     border-radius: 5px;
     cursor: pointer;
@@ -224,10 +212,37 @@ section {
     background-color: var(--color-04);
 }
 
+/* Button to Continue the Game */
+#buttonStep01 {
+    margin: 15px 5px 5px 5px;
+    padding: 8px;
+    width: 25%;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+    text-align: center;
+}
+#buttonStep02 {
+    margin: 20px 24px 16px 0;
+    padding: 8px;
+    width: 25%;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+    text-align: center;
+}
+.buttonLocked {
+    background-color: var(--color-02);
+}
+.buttonUnlocked {
+    background-color: var(--color-01);
+}
+
 /* Section 5: Player */
 .sectionPlayer {
     grid-area: 1 / 4 / 2 / 6;
 }
+
 /* Add a New Player */
 #inputAddPlayer {
     margin: 8px 0 8px 7px;
