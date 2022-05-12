@@ -173,6 +173,56 @@ section {
 #sectionGameStep02 {
     padding: 0;
 }
+.quizParameters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 12px;
+    margin: 4px 0 0 0;
+}
+.quizParameter {
+    display: flex;
+}
+.parameterTextBold {
+    margin: 0 8px 0 23px;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.1em;
+}
+/* 3 Parameters: Question Number, Country, Topic */
+#parameterQuestionNr,
+#parameterCountry,
+#parameterTopic {
+    font-size: 1.15em;
+}
+.quizQuestion {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    font-size: 1.2em;
+}
+.quizAnswers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 24px;
+    grid-row-gap: 20px;
+    text-align: center;
+}
+#quizAnswer01,
+#quizAnswer02,
+#quizAnswer03,
+#quizAnswer04 {
+    margin: 0 24px 0 24px;
+    padding: 10px;
+    background-color: var(--color-02);
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.quizAnswerCorrect {
+    background-color: var(--color-01);
+}
+.quizAnswerWrong {
+    background-color: var(--color-04);
+}
 
 /* Section 5: Player */
 .sectionPlayer {
