@@ -54,7 +54,7 @@ let answerKey = [
         country: "Ecuador",
         capital: "Quito",
         flag: "🇪🇨",
-        food: "Cuy picante",
+        food: "Cuy Picante",
         population: "17.64 million",
     },
     /* (8) Finland */ {
@@ -69,7 +69,7 @@ let answerKey = [
         capital: "Accra",
         flag: "🇬🇭",
         food: "Fufu",
-        population: "31.07 million.",
+        population: "31.07 million",
     },
     /* (10) Iceland */ {
         country: "Iceland",
@@ -108,16 +108,64 @@ let answerKey = [
     },
 ];
 
-/* Bank of Answers */
-let bankCapital;
-let bankFlag;
-let bankFood;
-let bankPopulation;
+/* Banks of Answers */
+let bankCapital = [
+    "Baku",
+    "Canberra",
+    "Minsk",
+    "Sofia",
+    "Ottawa",
+    "Bogotá",
+    "Copenhagen",
+    "Quito",
+    "Helsinki",
+    "Accra",
+    "Reykjavik",
+    "Nur-Sultan",
+    "Vilnius",
+    "Chișinău",
+    "Islamabad",
+];
+let bankFlag = ["🇦🇿", "🇦🇺", "🇧🇾", "🇧🇬", "🇨🇦", "🇨🇴", "🇩🇰", "🇪🇨", "🇫🇮", "🇬🇭", "🇮🇸", "🇰🇿", "🇱🇹", "🇲🇩", "🇵🇰"];
+let bankFood = [
+    "Plov",
+    "Vegemite",
+    "Babka",
+    "Kebatsche",
+    "Poutine",
+    "Ajiaco Santaferena",
+    "Smørrebrød",
+    "Cuy Picante",
+    "Karjalanpiirakka",
+    "Fufu",
+    "Skyr",
+    "Beschbarmaq",
+    "Cepelinai",
+    "Mamaliga",
+    "Nihari",
+];
+let bankPopulation = [
+    "10.11 million",
+    "25.69 million",
+    "9.4 million",
+    "6.5 million",
+    "38.01 million",
+    "50.88 million",
+    "5.8 million",
+    "17.64 million",
+    "5.5 million",
+    "31.07 million",
+    "366 425",
+    "18.75 million",
+    "2.7 million",
+    "2.6 million",
+    "220.9 million",
+];
 
 let points = 0;
 function actionPoints() {
-    const pointsElement = document.querySelector("#points");
-    pointsElement.innerText = points;
+    const pointsElm = document.querySelector("#points");
+    pointsElm.innerText = points;
 }
 
 let indexSelected = 0;
@@ -125,46 +173,46 @@ let countriesSelected = [];
 function actionCountry() {
     /* Country 1 */
     if (indexSelected === 1) {
-        const country01Element = document.querySelector("#country01");
-        let country01ValueElement = document.createElement("div");
-        country01ValueElement.setAttribute("id", "country01Value");
-        country01ValueElement.innerText = countriesSelected[0];
-        country01Element.appendChild(country01ValueElement);
+        const country01Elm = document.querySelector("#country01");
+        let country01ValueElm = document.createElement("div");
+        country01ValueElm.setAttribute("id", "country01Value");
+        country01ValueElm.innerText = countriesSelected[0];
+        country01Elm.appendChild(country01ValueElm);
     }
     /* Country 2 */
     if (indexSelected === 2) {
-        const country02Element = document.querySelector("#country02");
-        let country02ValueElement = document.createElement("div");
-        country02ValueElement.setAttribute("id", "country02Value");
-        country02ValueElement.innerText = countriesSelected[1];
-        country02Element.appendChild(country02ValueElement);
+        const country02Elm = document.querySelector("#country02");
+        let country02ValueElm = document.createElement("div");
+        country02ValueElm.setAttribute("id", "country02Value");
+        country02ValueElm.innerText = countriesSelected[1];
+        country02Elm.appendChild(country02ValueElm);
     }
     /* Country 3 */
     if (indexSelected === 3) {
-        const country03Element = document.querySelector("#country03");
-        let country03ValueElement = document.createElement("div");
-        country03ValueElement.setAttribute("id", "country03Value");
-        country03ValueElement.innerText = countriesSelected[2];
-        country03Element.appendChild(country03ValueElement);
+        const country03Elm = document.querySelector("#country03");
+        let country03ValueElm = document.createElement("div");
+        country03ValueElm.setAttribute("id", "country03Value");
+        country03ValueElm.innerText = countriesSelected[2];
+        country03Elm.appendChild(country03ValueElm);
     }
 }
 
 let currentPlayer = "NONE";
 function actionPlayer(valuePlayer) {
     /* Player */
-    const playerElement = document.querySelector("#player");
-    const playerInputElement = document.createElement("div");
-    playerInputElement.classList.add("playerInput");
-    playerInputElement.innerText = valuePlayer;
-    playerElement.appendChild(playerInputElement);
-    const playerDeleteElement = document.createElement("button");
-    playerDeleteElement.classList.add("playerDelete");
-    playerDeleteElement.innerHTML = "❌";
-    playerElement.appendChild(playerDeleteElement);
+    const playerElm = document.querySelector("#player");
+    const playerInputElm = document.createElement("div");
+    playerInputElm.classList.add("playerInput");
+    playerInputElm.innerText = valuePlayer;
+    playerElm.appendChild(playerInputElm);
+    const playerDeleteElm = document.createElement("button");
+    playerDeleteElm.classList.add("playerDelete");
+    playerDeleteElm.innerHTML = "❌";
+    playerElm.appendChild(playerDeleteElm);
     /* Delete Current Player */
-    playerDeleteElement.addEventListener("click", () => {
-        playerElement.removeChild(playerInputElement);
-        playerElement.removeChild(playerDeleteElement);
+    playerDeleteElm.addEventListener("click", () => {
+        playerElm.removeChild(playerInputElm);
+        playerElm.removeChild(playerDeleteElm);
         /* Set Current Player to NONE */
         currentPlayer = "NONE";
     });
@@ -174,184 +222,184 @@ let scorePlayer = 0;
 let scoreHighest = 0;
 function actionScore() {
     /* Player Score */
-    const scorePlayerElement = document.querySelector("#scorePlayer");
-    const scorePlayerValueElement = document.createElement("div");
-    scorePlayerValueElement.classList.add("scorePlayerValue");
-    scorePlayerValueElement.innerText = scorePlayer;
-    scorePlayerElement.appendChild(scorePlayerValueElement);
+    const scorePlayerElm = document.querySelector("#scorePlayer");
+    const scorePlayerValueElm = document.createElement("div");
+    scorePlayerValueElm.classList.add("scorePlayerValue");
+    scorePlayerValueElm.innerText = scorePlayer;
+    scorePlayerElm.appendChild(scorePlayerValueElm);
     /* Highest Score */
-    const scoreHighestElement = document.querySelector("#scoreHighest");
-    const scoreHighestValueElement = document.createElement("div");
-    scoreHighestValueElement.classList.add("scoreHighestValue");
-    scoreHighestValueElement.innerText = scoreHighest;
-    scoreHighestElement.appendChild(scoreHighestValueElement);
+    const scoreHighestElm = document.querySelector("#scoreHighest");
+    const scoreHighestValueElm = document.createElement("div");
+    scoreHighestValueElm.classList.add("scoreHighestValue");
+    scoreHighestValueElm.innerText = scoreHighest;
+    scoreHighestElm.appendChild(scoreHighestValueElm);
 }
 
 function actionJoker() {
     /* Jokers Available */
-    const jokersAvailableElement = document.querySelector("#jokersAvailable");
-    const jokerAvailableElement = document.createElement("div");
-    jokerAvailableElement.setAttribute("id", "jokerAvailable");
-    jokerAvailableElement.innerHTML = "⏱️";
+    const jokersAvailableElm = document.querySelector("#jokersAvailable");
+    const jokerAvailableElm = document.createElement("div");
+    jokerAvailableElm.setAttribute("id", "jokerAvailable");
+    jokerAvailableElm.innerHTML = "⏱️";
     /* Add an Available Joker */
-    jokersAvailableElement.appendChild(jokerAvailableElement);
+    jokersAvailableElm.appendChild(jokerAvailableElm);
     /* Jokers Purchased */
-    const jokersPurchasedElement = document.querySelector("#jokersPurchased");
-    const jokerPurchasedElement = document.createElement("div");
-    jokerPurchasedElement.setAttribute("id", "jokerPurchased");
-    jokerPurchasedElement.innerHTML = "⏱️";
+    const jokersPurchasedElm = document.querySelector("#jokersPurchased");
+    const jokerPurchasedElm = document.createElement("div");
+    jokerPurchasedElm.setAttribute("id", "jokerPurchased");
+    jokerPurchasedElm.innerHTML = "⏱️";
     /* Purchase an Available Joker */
-    jokerAvailableElement.addEventListener("click", () => {
+    jokerAvailableElm.addEventListener("click", () => {
         /* Delete Joker From Available List */
-        jokersAvailableElement.removeChild(jokerAvailableElement);
+        jokersAvailableElm.removeChild(jokerAvailableElm);
         /* Add a Joker to Purchased */
-        jokersPurchasedElement.appendChild(jokerPurchasedElement);
+        jokersPurchasedElm.appendChild(jokerPurchasedElm);
     });
 }
 
 /* Step 1: Select Countries */
 function gameStep01() {
     /* Append HTML Elements to Section */
-    const sectionGameElement = document.querySelector(".sectionGame");
-    const sectionGameStep01Element = document.querySelector("#sectionGameStep01");
-    sectionGameElement.appendChild(sectionGameStep01Element);
+    const sectionGameElm = document.querySelector(".sectionGame");
+    const sectionGameStep01Elm = document.querySelector("#sectionGameStep01");
+    sectionGameElm.appendChild(sectionGameStep01Elm);
     /* HTML Element: Header */
-    const sectionHeaderElement = document.createElement("div");
-    sectionHeaderElement.classList.add("sectionHeader");
-    sectionHeaderElement.innerHTML = "Select / 3 / Countries";
-    sectionGameStep01Element.appendChild(sectionHeaderElement);
+    const sectionHeaderElm = document.createElement("div");
+    sectionHeaderElm.classList.add("sectionHeader");
+    sectionHeaderElm.innerHTML = "Select / 3 / Countries";
+    sectionGameStep01Elm.appendChild(sectionHeaderElm);
     /* HTML Element: Country Selection — Text */
-    const countrySelectionTextBoldElement = document.createElement("div");
-    countrySelectionTextBoldElement.classList.add("countrySelectionTextBold");
-    countrySelectionTextBoldElement.innerHTML = "ATTENTION:";
-    sectionGameStep01Element.appendChild(countrySelectionTextBoldElement);
+    const countrySelectionTextBoldElm = document.createElement("div");
+    countrySelectionTextBoldElm.classList.add("countrySelectionTextBold");
+    countrySelectionTextBoldElm.innerHTML = "ATTENTION:";
+    sectionGameStep01Elm.appendChild(countrySelectionTextBoldElm);
     /* HTML Element: Country Selection — Text Bold */
-    const countrySelectionTextElement = document.createElement("div");
-    countrySelectionTextElement.classList.add("countrySelectionText");
-    countrySelectionTextElement.innerHTML = "Once selected a country, you can't change your selection.";
-    sectionGameStep01Element.appendChild(countrySelectionTextElement);
+    const countrySelectionTextElm = document.createElement("div");
+    countrySelectionTextElm.classList.add("countrySelectionText");
+    countrySelectionTextElm.innerHTML = "Once selected a country, you can't change your selection.";
+    sectionGameStep01Elm.appendChild(countrySelectionTextElm);
     /* HTML Element: Country Selection */
-    const countrySelectionElement = document.createElement("div");
-    countrySelectionElement.classList.add("countrySelection");
-    sectionGameStep01Element.appendChild(countrySelectionElement);
+    const countrySelectionElm = document.createElement("div");
+    countrySelectionElm.classList.add("countrySelection");
+    sectionGameStep01Elm.appendChild(countrySelectionElm);
     /* HTML Element: Country — Azerbaijan */
-    const countryAzerbaijanElement = document.createElement("div");
-    countryAzerbaijanElement.classList.add("countryName");
-    countryAzerbaijanElement.innerHTML = "Azerbaijan";
-    countrySelectionElement.appendChild(countryAzerbaijanElement);
+    const countryAzerbaijanElm = document.createElement("div");
+    countryAzerbaijanElm.classList.add("countryName");
+    countryAzerbaijanElm.innerHTML = "Azerbaijan";
+    countrySelectionElm.appendChild(countryAzerbaijanElm);
     /* HTML Element: Country — Australia */
-    const countryAustraliaElement = document.createElement("div");
-    countryAustraliaElement.classList.add("countryName");
-    countryAustraliaElement.innerHTML = "Australia";
-    countrySelectionElement.appendChild(countryAustraliaElement);
+    const countryAustraliaElm = document.createElement("div");
+    countryAustraliaElm.classList.add("countryName");
+    countryAustraliaElm.innerHTML = "Australia";
+    countrySelectionElm.appendChild(countryAustraliaElm);
     /* HTML Element: Country — Belarus */
-    const countryBelarusElement = document.createElement("div");
-    countryBelarusElement.classList.add("countryName");
-    countryBelarusElement.innerHTML = "Belarus";
-    countrySelectionElement.appendChild(countryBelarusElement);
+    const countryBelarusElm = document.createElement("div");
+    countryBelarusElm.classList.add("countryName");
+    countryBelarusElm.innerHTML = "Belarus";
+    countrySelectionElm.appendChild(countryBelarusElm);
     /* HTML Element: Country — Bulgaria */
-    const countryBulgariaElement = document.createElement("div");
-    countryBulgariaElement.classList.add("countryName");
-    countryBulgariaElement.innerHTML = "Bulgaria";
-    countrySelectionElement.appendChild(countryBulgariaElement);
+    const countryBulgariaElm = document.createElement("div");
+    countryBulgariaElm.classList.add("countryName");
+    countryBulgariaElm.innerHTML = "Bulgaria";
+    countrySelectionElm.appendChild(countryBulgariaElm);
     /* HTML Element: Country — Canada */
-    const countryCanadaElement = document.createElement("div");
-    countryCanadaElement.classList.add("countryName");
-    countryCanadaElement.innerHTML = "Canada";
-    countrySelectionElement.appendChild(countryCanadaElement);
+    const countryCanadaElm = document.createElement("div");
+    countryCanadaElm.classList.add("countryName");
+    countryCanadaElm.innerHTML = "Canada";
+    countrySelectionElm.appendChild(countryCanadaElm);
     /* HTML Element: Country — Colombia */
-    const countryColombiaElement = document.createElement("div");
-    countryColombiaElement.classList.add("countryName");
-    countryColombiaElement.innerHTML = "Colombia";
-    countrySelectionElement.appendChild(countryColombiaElement);
+    const countryColombiaElm = document.createElement("div");
+    countryColombiaElm.classList.add("countryName");
+    countryColombiaElm.innerHTML = "Colombia";
+    countrySelectionElm.appendChild(countryColombiaElm);
     /* HTML Element: Country — Denmark */
-    const countryDenmarkElement = document.createElement("div");
-    countryDenmarkElement.classList.add("countryName");
-    countryDenmarkElement.innerHTML = "Denmark";
-    countrySelectionElement.appendChild(countryDenmarkElement);
+    const countryDenmarkElm = document.createElement("div");
+    countryDenmarkElm.classList.add("countryName");
+    countryDenmarkElm.innerHTML = "Denmark";
+    countrySelectionElm.appendChild(countryDenmarkElm);
     /* HTML Element: Country — Ecuador */
-    const countryEcuadorElement = document.createElement("div");
-    countryEcuadorElement.classList.add("countryName");
-    countryEcuadorElement.innerHTML = "Ecuador";
-    countrySelectionElement.appendChild(countryEcuadorElement);
+    const countryEcuadorElm = document.createElement("div");
+    countryEcuadorElm.classList.add("countryName");
+    countryEcuadorElm.innerHTML = "Ecuador";
+    countrySelectionElm.appendChild(countryEcuadorElm);
     /* HTML Element: Country — Finland */
-    const countryFinlandElement = document.createElement("div");
-    countryFinlandElement.classList.add("countryName");
-    countryFinlandElement.innerHTML = "Finland";
-    countrySelectionElement.appendChild(countryFinlandElement);
+    const countryFinlandElm = document.createElement("div");
+    countryFinlandElm.classList.add("countryName");
+    countryFinlandElm.innerHTML = "Finland";
+    countrySelectionElm.appendChild(countryFinlandElm);
     /* HTML Element: Country — Ghana */
-    const countryGhanaElement = document.createElement("div");
-    countryGhanaElement.classList.add("countryName");
-    countryGhanaElement.innerHTML = "Ghana";
-    countrySelectionElement.appendChild(countryGhanaElement);
+    const countryGhanaElm = document.createElement("div");
+    countryGhanaElm.classList.add("countryName");
+    countryGhanaElm.innerHTML = "Ghana";
+    countrySelectionElm.appendChild(countryGhanaElm);
     /* HTML Element: Country — Iceland */
-    const countryIcelandElement = document.createElement("div");
-    countryIcelandElement.classList.add("countryName");
-    countryIcelandElement.innerHTML = "Iceland";
-    countrySelectionElement.appendChild(countryIcelandElement);
+    const countryIcelandElm = document.createElement("div");
+    countryIcelandElm.classList.add("countryName");
+    countryIcelandElm.innerHTML = "Iceland";
+    countrySelectionElm.appendChild(countryIcelandElm);
     /* HTML Element: Country — Kazakhstan */
-    const countryKazakhstanElement = document.createElement("div");
-    countryKazakhstanElement.classList.add("countryName");
-    countryKazakhstanElement.innerHTML = "Kazakhstan";
-    countrySelectionElement.appendChild(countryKazakhstanElement);
+    const countryKazakhstanElm = document.createElement("div");
+    countryKazakhstanElm.classList.add("countryName");
+    countryKazakhstanElm.innerHTML = "Kazakhstan";
+    countrySelectionElm.appendChild(countryKazakhstanElm);
     /* HTML Element: Country — Lithuania */
-    const countryLithuaniaElement = document.createElement("div");
-    countryLithuaniaElement.classList.add("countryName");
-    countryLithuaniaElement.innerHTML = "Lithuania";
-    countrySelectionElement.appendChild(countryLithuaniaElement);
+    const countryLithuaniaElm = document.createElement("div");
+    countryLithuaniaElm.classList.add("countryName");
+    countryLithuaniaElm.innerHTML = "Lithuania";
+    countrySelectionElm.appendChild(countryLithuaniaElm);
     /* HTML Element: Country — Moldova */
-    const countryMoldovaElement = document.createElement("div");
-    countryMoldovaElement.classList.add("countryName");
-    countryMoldovaElement.innerHTML = "Moldova";
-    countrySelectionElement.appendChild(countryMoldovaElement);
+    const countryMoldovaElm = document.createElement("div");
+    countryMoldovaElm.classList.add("countryName");
+    countryMoldovaElm.innerHTML = "Moldova";
+    countrySelectionElm.appendChild(countryMoldovaElm);
     /* HTML Element: Country — Pakistan */
-    const countryPakistanElement = document.createElement("div");
-    countryPakistanElement.classList.add("countryName");
-    countryPakistanElement.innerHTML = "Pakistan";
-    countrySelectionElement.appendChild(countryPakistanElement);
+    const countryPakistanElm = document.createElement("div");
+    countryPakistanElm.classList.add("countryName");
+    countryPakistanElm.innerHTML = "Pakistan";
+    countrySelectionElm.appendChild(countryPakistanElm);
     /* HTML Element: Button to Continue */
-    const buttonContinueElement = document.createElement("div");
-    buttonContinueElement.setAttribute("id", "buttonContinue");
-    buttonContinueElement.classList.add("buttonContinueLocked");
-    buttonContinueElement.innerHTML = "Click to Continue";
-    sectionGameStep01Element.appendChild(buttonContinueElement);
+    const buttonContinueElm = document.createElement("div");
+    buttonContinueElm.setAttribute("id", "buttonContinue");
+    buttonContinueElm.classList.add("buttonContinueLocked");
+    buttonContinueElm.innerHTML = "Click to Continue";
+    sectionGameStep01Elm.appendChild(buttonContinueElm);
 
     /* Loop Through 15 Countries */
-    const countryNameElement = document.querySelectorAll(".countryName");
-    for (let i = 0; i < countryNameElement.length; i++) {
-        countryNameElement[i].addEventListener("click", () => {
+    const countryNameElm = document.querySelectorAll(".countryName");
+    for (let i = 0; i < countryNameElm.length; i++) {
+        countryNameElm[i].addEventListener("click", () => {
             if (currentPlayer === "NONE") {
                 /* Do Not Proceed If Current Player is Not Selected */
                 alert("Before choosing the countries for the game, please add the player.");
                 return;
             } else if (indexSelected !== 3) {
                 /* Select Only Three Elements */
-                countryNameElement[i].classList.add("countryNameSelected");
-                countriesSelected[indexSelected] = countryNameElement[i].innerText;
+                countryNameElm[i].classList.add("countryNameSelected");
+                countriesSelected[indexSelected] = countryNameElm[i].innerText;
                 indexSelected++;
                 /* Set Countries List Based on Selection */
                 actionCountry();
                 /* If Three Countries Are Selected, Lock the Remaining Countries */
                 if (indexSelected === 3) {
-                    for (let i = 0; i < countryNameElement.length; i++) {
-                        if (countryNameElement[i].classList.contains("countryNameSelected")) continue;
+                    for (let i = 0; i < countryNameElm.length; i++) {
+                        if (countryNameElm[i].classList.contains("countryNameSelected")) continue;
                         else {
-                            countryNameElement[i].classList.add("countryNameLocked");
+                            countryNameElm[i].classList.add("countryNameLocked");
                         }
                     }
-                    buttonContinueElement.classList.add("buttonContinueUnlocked");
+                    buttonContinueElm.classList.add("buttonContinueUnlocked");
                 }
             }
         });
     }
 
     /* Proceed To Quiz */
-    buttonContinueElement.addEventListener("click", () => {
+    buttonContinueElm.addEventListener("click", () => {
         if (indexSelected !== 3) {
             alert("Before proceeding to game, please select the countries.");
             return;
         } else {
-            sectionGameElement.removeChild(sectionGameStep01Element);
+            sectionGameElm.removeChild(sectionGameStep01Elm);
             gameStep02();
         }
     });
@@ -360,40 +408,102 @@ function gameStep01() {
 /* Step 2: Quiz */
 let answersCorrect = 0;
 let answersWrong = 0;
-function gameStep02() {}
 
-{
-    /* <section id="sectionGameStep02">
-                    <div class="sectionHeader">Geography Quiz</div>
-                    <div class="quizParameters">
-                        <div class="quizParameter">
-                            <div class="parameterTextBold">QUESTION:</div>
-                            <div id="parameterQuestionNr">1 / 12</div>
-                        </div>
-                        <div class="quizParameter">
-                            <div class="parameterTextBold">COUNTRY:</div>
-                            <div id="parameterCountry">Australia</div>
-                        </div>
-                        <div class="quizParameter">
-                            <div class="parameterTextBold">TOPIC:</div>
-                            <div id="parameterTopic">Capital City</div>
-                        </div>
-                    </div>
-                    <div class="quizQuestion">What is the capital city of the following country?</div>
-                    <div class="quizAnswers">
-                        <div id="quizAnswer01">Answer 1</div>
-                        <div id="quizAnswer02">Answer 2</div>
-                        <div id="quizAnswer03">Answer 3</div>
-                        <div id="quizAnswer04">Answer 4</div>
-                    </div>
-                </section> */
+let answer01 = "Answer 1";
+let answer02 = "Answer 2";
+let answer03 = "Answer 3";
+let answer04 = "Answer 4";
+
+function gameStep02() {
+    const sectionGameElm = document.querySelector(".sectionGame");
+    const sectionGameStep02Elm = document.querySelector("#sectionGameStep02");
+    sectionGameElm.appendChild(sectionGameStep02Elm);
+    /* HTML Element: Header */
+    const sectionHeaderElm = document.createElement("div");
+    sectionHeaderElm.classList.add("sectionHeader");
+    sectionHeaderElm.innerHTML = "Geography Quiz";
+    sectionGameStep02Elm.appendChild(sectionHeaderElm);
+    /* HTML Element: Quiz Parameters */
+    const quizParametersElm = document.createElement("div");
+    quizParametersElm.classList.add("quizParameters");
+    sectionGameStep02Elm.appendChild(quizParametersElm);
+    /* HTML Element: Quiz Parameter 1 */
+    const quizParameter01Elm = document.createElement("div");
+    quizParameter01Elm.classList.add("quizParameter");
+    const parameter01TextBoldElm = document.createElement("div");
+    parameter01TextBoldElm.classList.add("parameterTextBold");
+    parameter01TextBoldElm.innerHTML = "QUESTION:";
+    quizParameter01Elm.appendChild(parameter01TextBoldElm);
+    const parameter01QuestionNrElm = document.createElement("div");
+    parameter01QuestionNrElm.setAttribute("id", "parameterQuestionNr");
+    parameter01QuestionNrElm.innerText = "1 / 12";
+    quizParameter01Elm.appendChild(parameter01QuestionNrElm);
+    quizParametersElm.appendChild(quizParameter01Elm);
+    /* HTML Element: Quiz Parameter 2 */
+    const quizParameter02Elm = document.createElement("div");
+    quizParameter02Elm.classList.add("quizParameter");
+    const parameter02TextBoldElm = document.createElement("div");
+    parameter02TextBoldElm.classList.add("parameterTextBold");
+    parameter02TextBoldElm.innerHTML = "COUNTRY:";
+    quizParameter02Elm.appendChild(parameter02TextBoldElm);
+    const parameter02CountryElm = document.createElement("div");
+    parameter02CountryElm.setAttribute("id", "parameterCountry");
+    parameter02CountryElm.innerText = "Australia";
+    quizParameter02Elm.appendChild(parameter02CountryElm);
+    quizParametersElm.appendChild(quizParameter02Elm);
+    /* HTML Element: Quiz Parameter 3 */
+    const quizParameter03Elm = document.createElement("div");
+    quizParameter03Elm.classList.add("quizParameter");
+    const parameter03TextBoldElm = document.createElement("div");
+    parameter03TextBoldElm.classList.add("parameterTextBold");
+    parameter03TextBoldElm.innerHTML = "TOPIC:";
+    quizParameter03Elm.appendChild(parameter03TextBoldElm);
+    const parameter03TopicElm = document.createElement("div");
+    parameter03TopicElm.setAttribute("id", "parameterTopic");
+    parameter03TopicElm.innerText = "Capital City";
+    quizParameter03Elm.appendChild(parameter03TopicElm);
+    quizParametersElm.appendChild(quizParameter03Elm);
+    /* HTML Element: Quiz Question */
+    const quizQuestionElm = document.createElement("div");
+    quizQuestionElm.classList.add("quizQuestion");
+    quizQuestionElm.innerHTML = "What is the capital city of the following country?";
+    sectionGameStep02Elm.appendChild(quizQuestionElm);
+    /* HTML Element: Quiz Answers */
+    const quizAnswersElm = document.createElement("div");
+    quizAnswersElm.classList.add("quizAnswers");
+    sectionGameStep02Elm.appendChild(quizAnswersElm);
+    /* HTML Element: Quiz Answer 1 */
+    const quizAnswer01Elm = document.createElement("div");
+    quizAnswer01Elm.setAttribute("id", "quizAnswer01");
+    quizAnswer01Elm.innerText = answer01;
+    quizAnswersElm.appendChild(quizAnswer01Elm);
+    /* HTML Element: Quiz Answer 2 */
+    const quizAnswer02Elm = document.createElement("div");
+    quizAnswer02Elm.setAttribute("id", "quizAnswer02");
+    quizAnswer02Elm.innerText = answer02;
+    quizAnswersElm.appendChild(quizAnswer02Elm);
+    /* HTML Element: Quiz Answer 3 */
+    const quizAnswer03Elm = document.createElement("div");
+    quizAnswer03Elm.setAttribute("id", "quizAnswer03");
+    quizAnswer03Elm.innerText = answer03;
+    quizAnswersElm.appendChild(quizAnswer03Elm);
+    /* HTML Element: Quiz Answer 4 */
+    const quizAnswer04Elm = document.createElement("div");
+    quizAnswer04Elm.setAttribute("id", "quizAnswer04");
+    quizAnswer04Elm.innerText = answer04;
+    quizAnswersElm.appendChild(quizAnswer04Elm);
+
+    /* Begin the Game (12 Questions) */
+    for (let i = 0; i < 12; i++) {}
 }
 
 /* Step 3: Results */
 function gameStep03() {}
 
 window.addEventListener("load", () => {
-    console.log(answerKey);
+    for (let i = 0; i < 15; i++) {
+        console.log(answerKey[i].population);
+    }
     /* Add a New Player */
     const playerFormElement = document.querySelector("#formAddPlayer");
     const playerInputElement = document.querySelector("#inputAddPlayer");
