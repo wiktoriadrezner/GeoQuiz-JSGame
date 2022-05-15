@@ -194,6 +194,18 @@ function actionCountry() {
         country03ValueElm.setAttribute("id", "country03Value");
         country03ValueElm.innerText = countriesSelected[2];
         country03Elm.appendChild(country03ValueElm);
+        /* Transfer the Answer Key to Array */
+        for (let i = 0; i < answerKey.length; i++) {
+            if (countriesSelected[0] === answerKey[i].country) {
+                countriesSelected[0] = answerKey[i];
+            }
+            if (countriesSelected[1] === answerKey[i].country) {
+                countriesSelected[1] = answerKey[i];
+            }
+            if (countriesSelected[2] === answerKey[i].country) {
+                countriesSelected[2] = answerKey[i];
+            }
+        }
     }
 }
 
@@ -358,7 +370,7 @@ function gameStep01() {
     countryPakistanElm.innerHTML = "Pakistan";
     countrySelectionElm.appendChild(countryPakistanElm);
     /* HTML Element: Button to Continue */
-    const buttonStep01Elm = document.createElement("div");
+    const buttonStep01Elm = document.createElement("button");
     buttonStep01Elm.setAttribute("id", "buttonStep01");
     buttonStep01Elm.classList.add("buttonLocked");
     buttonStep01Elm.innerHTML = "Click to Continue";
@@ -409,16 +421,16 @@ function gameStep01() {
 /* Answers Counter */
 let answersCorrect = 0;
 let answersWrong = 0;
+/* Question Counter */
+let questionCounter = 0;
 /* Set Answers */
+let correctAnswer;
 let answer01 = "Answer 1";
 let answer02 = "Answer 2";
 let answer03 = "Answer 3";
 let answer04 = "Answer 4";
-/* Define Parameters */
-let paramQuestionNr = "1"; /* Set Question Number to 1 */
-let paramCountry; /* Set Country to First Chosen Country */
-let paramTopic; /* Begin with the Capital */
-let paramQuestion; /* Set the Question Based on Topic */
+let xP = 0;
+
 function gameStep02() {
     const sectionGameElm = document.querySelector(".sectionGame");
     const sectionGameStep02Elm = document.querySelector("#sectionGameStep02");
@@ -439,9 +451,9 @@ function gameStep02() {
     parameter01TextBoldElm.classList.add("parameterTextBold");
     parameter01TextBoldElm.innerHTML = "QUESTION:";
     quizParameter01Elm.appendChild(parameter01TextBoldElm);
-    const parameter01QuestionNrElm = document.createElement("div");
+    let parameter01QuestionNrElm = document.createElement("div"); /* Will be Updated */
     parameter01QuestionNrElm.setAttribute("id", "parameterQuestionNr");
-    parameter01QuestionNrElm.innerText = paramQuestionNr;
+    parameter01QuestionNrElm.innerText = questionCounter + 1;
     quizParameter01Elm.appendChild(parameter01QuestionNrElm);
     quizParametersElm.appendChild(quizParameter01Elm);
     /* HTML Element: Quiz Parameter 2 */
@@ -451,9 +463,9 @@ function gameStep02() {
     parameter02TextBoldElm.classList.add("parameterTextBold");
     parameter02TextBoldElm.innerHTML = "COUNTRY:";
     quizParameter02Elm.appendChild(parameter02TextBoldElm);
-    const parameter02CountryElm = document.createElement("div");
+    let parameter02CountryElm = document.createElement("div"); /* Will be Updated */
     parameter02CountryElm.setAttribute("id", "parameterCountry");
-    parameter02CountryElm.innerText = paramCountry;
+    parameter02CountryElm.innerText = countriesSelected[0].country;
     quizParameter02Elm.appendChild(parameter02CountryElm);
     quizParametersElm.appendChild(quizParameter02Elm);
     /* HTML Element: Quiz Parameter 3 */
@@ -463,78 +475,99 @@ function gameStep02() {
     parameter03TextBoldElm.classList.add("parameterTextBold");
     parameter03TextBoldElm.innerHTML = "TOPIC:";
     quizParameter03Elm.appendChild(parameter03TextBoldElm);
-    const parameter03TopicElm = document.createElement("div");
+    let parameter03TopicElm = document.createElement("div"); /* Will be Updated */
     parameter03TopicElm.setAttribute("id", "parameterTopic");
-    parameter03TopicElm.innerText = paramTopic;
+    parameter03TopicElm.innerText = "Capital City";
     quizParameter03Elm.appendChild(parameter03TopicElm);
     quizParametersElm.appendChild(quizParameter03Elm);
     /* HTML Element: Quiz Question */
-    const quizQuestionElm = document.createElement("div");
+    let quizQuestionElm = document.createElement("div"); /* Will be Updated */
     quizQuestionElm.classList.add("quizQuestion");
-    quizQuestionElm.innerHTML = paramQuestion;
+    quizQuestionElm.innerHTML = "What is the capital city of the following country?";
     sectionGameStep02Elm.appendChild(quizQuestionElm);
     /* HTML Element: Quiz Answers */
     const quizAnswersElm = document.createElement("div");
     quizAnswersElm.classList.add("quizAnswers");
     sectionGameStep02Elm.appendChild(quizAnswersElm);
     /* HTML Element: Quiz Answer 1 */
-    const quizAnswer01Elm = document.createElement("div");
+    let quizAnswer01Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer01Elm.setAttribute("id", "quizAnswer01");
     quizAnswer01Elm.innerText = answer01;
     quizAnswersElm.appendChild(quizAnswer01Elm);
     /* HTML Element: Quiz Answer 2 */
-    const quizAnswer02Elm = document.createElement("div");
+    let quizAnswer02Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer02Elm.setAttribute("id", "quizAnswer02");
     quizAnswer02Elm.innerText = answer02;
     quizAnswersElm.appendChild(quizAnswer02Elm);
     /* HTML Element: Quiz Answer 3 */
-    const quizAnswer03Elm = document.createElement("div");
+    let quizAnswer03Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer03Elm.setAttribute("id", "quizAnswer03");
     quizAnswer03Elm.innerText = answer03;
     quizAnswersElm.appendChild(quizAnswer03Elm);
     /* HTML Element: Quiz Answer 4 */
-    const quizAnswer04Elm = document.createElement("div");
+    let quizAnswer04Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer04Elm.setAttribute("id", "quizAnswer04");
     quizAnswer04Elm.innerText = answer04;
     quizAnswersElm.appendChild(quizAnswer04Elm);
     /* HTML Element: Button to Continue */
-    const buttonStep02Elm = document.createElement("div");
+    const buttonStep02Elm = document.createElement("button");
     buttonStep02Elm.setAttribute("id", "buttonStep02");
     buttonStep02Elm.classList.add("buttonLocked");
     buttonStep02Elm.innerHTML = "Next Question";
     sectionGameStep02Elm.appendChild(buttonStep02Elm);
 
-    /* Begin the Game (12 Questions) */
-    for (let x = 0; x < 3; x++) {
-        paramCountry = countriesSelected[x];
-        for (let y = 0; y < 4; y++) {
-            if (y === 0) {
-                paramTopic = "Capital City";
-                paramQuestion = "What is the capital city of the following country?";
-            }
-            if (y === 1) {
-                paramTopic = "Flag";
-                paramQuestion = "What is the flag of the following country?";
-            }
-            if (y === 2) {
-                paramTopic = "Famous Food";
-                paramQuestion = "What is the famous food in the following country?";
-            }
-            if (y === 3) {
-                paramTopic = "Population";
-                paramQuestion = "What is the population of the following country?";
-            }
+    /* Begin the Quiz */
+    buttonStep02Elm.addEventListener("click", () => {
+        /* Update Question Number Parameter */
+        questionCounter++;
+        parameter01QuestionNrElm.innerText = questionCounter + 1; /* Actual Question != 0 */
+
+        /* Proceed to Results */
+        if (questionCounter === 11) {
+            buttonStep02Elm.innerHTML = "Proceed to Results";
+        } else if (questionCounter === 12) {
+            sectionGameElm.removeChild(sectionGameStep02Elm);
+            gameStep03();
         }
-    }
+
+        /* Set Country Parameter Depending on Question Number */
+        if (questionCounter <= 3) {
+            parameter02CountryElm.innerText = countriesSelected[0].country;
+        } else if (questionCounter >= 4 && questionCounter <= 7) {
+            parameter02CountryElm.innerText = countriesSelected[1].country;
+        } else if (questionCounter >= 8) {
+            parameter02CountryElm.innerText = countriesSelected[2].country;
+        }
+
+        /* Set Topic Parameter Depending on Question Number */
+        if (questionCounter === 0 || questionCounter === 4 || questionCounter === 8) {
+            parameter03TopicElm.innerText = "Capital City";
+            quizQuestionElm.innerHTML = "What is the capital city of the following country?";
+            /* Get the Name of Correct Answer (Capital City) */
+            correctAnswer = countriesSelected[xP].capital;
+        } else if (questionCounter === 1 || questionCounter === 5 || questionCounter === 9) {
+            parameter03TopicElm.innerText = "Flag";
+            quizQuestionElm.innerHTML = "What is the flag of the following country?";
+            /* Get the Name of Correct Answer (Flag) */
+            correctAnswer = countriesSelected[xP].flag;
+        } else if (questionCounter === 2 || questionCounter === 6 || questionCounter === 10) {
+            parameter03TopicElm.innerText = "Famous Food";
+            quizQuestionElm.innerHTML = "What is the famous food in the following country?";
+            /* Get the Name of Correct Answer (Famous Food) */
+            correctAnswer = countriesSelected[xP].food;
+        } else if (questionCounter === 3 || questionCounter === 7 || questionCounter === 11) {
+            parameter03TopicElm.innerText = "Population";
+            quizQuestionElm.innerHTML = "What is the population of the following country?";
+            /* Get the Name of Correct Answer (Population) */
+            correctAnswer = countriesSelected[xP].population;
+        }
+    });
 }
 
 /* Step 3: Results */
 function gameStep03() {}
 
 window.addEventListener("load", () => {
-    for (let i = 0; i < 15; i++) {
-        console.log(answerKey[i].population);
-    }
     /* Add a New Player */
     const playerFormElement = document.querySelector("#formAddPlayer");
     const playerInputElement = document.querySelector("#inputAddPlayer");
@@ -561,7 +594,7 @@ window.addEventListener("load", () => {
     });
 
     /* Begin Game: Choose Countries */
-    gameStep02();
+    gameStep01();
 
     /* Update Score */
     actionScore();

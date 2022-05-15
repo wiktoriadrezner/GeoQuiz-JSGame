@@ -204,6 +204,7 @@ section {
     border: 2px solid white;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1.1em;
 }
 .quizAnswerCorrect {
     background-color: var(--color-01);
@@ -213,23 +214,22 @@ section {
 }
 
 /* Button to Continue the Game */
-#buttonStep01 {
-    margin: 15px 5px 5px 5px;
+#buttonStep01,
+#buttonStep02 {
     padding: 8px;
     width: 25%;
+    border: 2px solid white;
     border-radius: 5px;
     cursor: pointer;
     float: right;
     text-align: center;
+    font-size: 1em;
+}
+#buttonStep01 {
+    margin: 15px 5px 5px 5px;
 }
 #buttonStep02 {
     margin: 20px 24px 16px 0;
-    padding: 8px;
-    width: 25%;
-    border-radius: 5px;
-    cursor: pointer;
-    float: right;
-    text-align: center;
 }
 .buttonLocked {
     background-color: var(--color-02);
