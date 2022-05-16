@@ -162,12 +162,6 @@ let bankPopulation = [
     "220.9 million",
 ];
 
-let points = 0;
-function updatePoints() {
-    const pointsElm = document.querySelector("#points");
-    pointsElm.innerText = points;
-}
-
 let currentPlayer = "NONE";
 function updatePlayer(valuePlayer) {
     /* Player */
@@ -191,19 +185,16 @@ function updatePlayer(valuePlayer) {
 
 let scorePlayer = 0;
 let scoreHighest = 0;
+const scorePlayerValueElm = document.querySelector("#scorePlayerValue");
+scorePlayerValueElm.innerText = scorePlayer;
+const scoreHighestValueElm = document.querySelector("#scoreHighestValue");
+scoreHighestValueElm.innerText = scoreHighest;
 function updateScore() {
-    /* Player Score */
-    const scorePlayerElm = document.querySelector("#scorePlayer");
-    const scorePlayerValueElm = document.createElement("div");
-    scorePlayerValueElm.classList.add("scorePlayerValue");
+    if (scorePlayer > scoreHighest) {
+        scoreHighest = scorePlayer;
+    }
     scorePlayerValueElm.innerText = scorePlayer;
-    scorePlayerElm.appendChild(scorePlayerValueElm);
-    /* Highest Score */
-    const scoreHighestElm = document.querySelector("#scoreHighest");
-    const scoreHighestValueElm = document.createElement("div");
-    scoreHighestValueElm.classList.add("scoreHighestValue");
     scoreHighestValueElm.innerText = scoreHighest;
-    scoreHighestElm.appendChild(scoreHighestValueElm);
 }
 
 function actionJoker() {
@@ -552,6 +543,26 @@ function generateAnswers() {
     }
 }
 
+let points = 0;
+const pointsElm = document.querySelector("#points");
+pointsElm.innerText = points;
+function updatePoints() {
+    console.log("ENTERED");
+    if (parameter03TopicElm.innerText === "Capital City") {
+        points += 150;
+        pointsElm.innerText = points;
+    } else if (parameter03TopicElm.innerText === "Flag") {
+        points += 200;
+        pointsElm.innerText = points;
+    } else if (parameter03TopicElm.innerText === "Famous Food") {
+        points += 300;
+        pointsElm.innerText = points;
+    } else if (parameter03TopicElm.innerText === "Population") {
+        points += 250;
+        pointsElm.innerText = points;
+    }
+}
+
 /* Step 2: Quiz */
 function gameStep02() {
     const sectionGameElm = document.querySelector(".sectionGame");
@@ -658,10 +669,11 @@ function gameStep02() {
     const quizAnswerElm = document.querySelectorAll(".quizAnswer");
     for (let i = 0; i < quizAnswerElm.length; i++) {
         quizAnswerElm[i].addEventListener("click", () => {
-            if (this.innerText === correctAnswer) {
+            if (quizAnswerElm[i].innerText === correctAnswer) {
                 /* The Answer Is Correct */
                 quizAnswerElm[i].classList.add("quizAnswerCorrect");
                 answersCorrect++;
+                updatePoints();
             } else {
                 /* The Answer Is Wrong */
                 quizAnswerElm[i].classList.add("quizAnswerWrong");
@@ -673,7 +685,10 @@ function gameStep02() {
 }
 
 /* Step 3: Results */
-function gameStep03() {}
+function gameStep03() {
+    scorePlayer = points;
+    updateScore();
+}
 
 window.addEventListener("load", () => {
     /* Add a New Player */
@@ -703,12 +718,6 @@ window.addEventListener("load", () => {
 
     /* Proceed to Country Selection */
     gameStep01();
-
-    /* Update Score */
-    updateScore();
-
-    /* Display Current Points */
-    updatePoints();
 
     /* Joker */
     actionJoker();
