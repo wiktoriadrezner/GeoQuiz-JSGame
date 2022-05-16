@@ -260,6 +260,7 @@ function actionJoker() {
     const jokerPurchasedElm = document.createElement("div");
     jokerPurchasedElm.setAttribute("id", "jokerPurchased");
     jokerPurchasedElm.innerHTML = "⏱️";
+
     /* Purchase an Available Joker */
     jokerAvailableElm.addEventListener("click", () => {
         /* Delete Joker From Available List */
@@ -423,13 +424,128 @@ let answersCorrect = 0;
 let answersWrong = 0;
 /* Question Counter */
 let questionCounter = 0;
+let xP = 0;
 /* Set Answers */
 let correctAnswer;
-let answer01 = "Answer 1";
-let answer02 = "Answer 2";
-let answer03 = "Answer 3";
-let answer04 = "Answer 4";
-let xP = 0;
+
+let elementGenerated;
+
+/* Random Answers */
+let randomAnswer;
+let randomAnswers = [];
+
+let quizQuestionElm;
+let quizAnswer01Elm, quizAnswer02Elm, quizAnswer03Elm, quizAnswer04Elm;
+let parameter01QuestionNrElm, parameter02CountryElm, parameter03TopicElm;
+
+function generateAnswers() {
+    /* Increase Question Number */
+    questionCounter++;
+    parameter01QuestionNrElm.innerText = questionCounter;
+
+    /* Set Country Parameter */
+    if ([1, 2, 3, 4].includes(questionCounter)) {
+        xP = 0;
+        parameter02CountryElm.innerText = countriesSelected[xP].country;
+    } else if ([5, 6, 7, 8].includes(questionCounter)) {
+        xP = 1;
+        parameter02CountryElm.innerText = countriesSelected[xP].country;
+    } else if ([9, 10, 11, 12].includes(questionCounter)) {
+        xP = 2;
+        parameter02CountryElm.innerText = countriesSelected[xP].country;
+    }
+
+    /* Set Topic Parameter + Generate Answers */
+    if ([1, 5, 9].includes(questionCounter)) {
+        parameter03TopicElm.innerText = "Capital City";
+        quizQuestionElm.innerHTML = "What is the capital city of the following country?";
+        /* Put Correct Answer to the Array */
+        correctAnswer = countriesSelected[xP].capital;
+        randomAnswers[0] = correctAnswer;
+        /* Generate Three Random Answers */
+        let loopRound = 1;
+        do {
+            randomAnswer = bankCapital[Math.floor(Math.random() * bankCapital.length)];
+            if (!randomAnswers.includes(randomAnswer)) {
+                randomAnswers[loopRound] = randomAnswer;
+                loopRound++;
+            }
+        } while (loopRound < 4);
+        /* Shuffle the Answers */
+        randomAnswers.sort(() => Math.random() - 0.5); /* This Code Was Taken From: https://javascript.info/array-methods — Wiktoria Drezner, 16/05/2022 */
+        /* Set the Shuffled Answers */
+        quizAnswer01Elm.innerText = randomAnswers[0];
+        quizAnswer02Elm.innerText = randomAnswers[1];
+        quizAnswer03Elm.innerText = randomAnswers[2];
+        quizAnswer04Elm.innerText = randomAnswers[3];
+    } else if ([2, 6, 10].includes(questionCounter)) {
+        parameter03TopicElm.innerText = "Flag";
+        quizQuestionElm.innerHTML = "What is the flag of the following country?";
+        /* Put Correct Answer to the Array */
+        correctAnswer = countriesSelected[xP].flag;
+        randomAnswers[0] = correctAnswer;
+        /* Generate Three Random Answers */
+        let loopRound = 1;
+        do {
+            randomAnswer = bankFlag[Math.floor(Math.random() * bankFlag.length)];
+            if (!randomAnswers.includes(randomAnswer)) {
+                randomAnswers[loopRound] = randomAnswer;
+                loopRound++;
+            }
+        } while (loopRound < 4);
+        /* Shuffle the Answers */
+        randomAnswers.sort(() => Math.random() - 0.5); /* This Code Was Taken From: https://javascript.info/array-methods — Wiktoria Drezner, 16/05/2022 */
+        /* Set the Shuffled Answers */
+        quizAnswer01Elm.innerText = randomAnswers[0];
+        quizAnswer02Elm.innerText = randomAnswers[1];
+        quizAnswer03Elm.innerText = randomAnswers[2];
+        quizAnswer04Elm.innerText = randomAnswers[3];
+    } else if ([3, 7, 11].includes(questionCounter)) {
+        parameter03TopicElm.innerText = "Famous Food";
+        quizQuestionElm.innerHTML = "What is the famous food in the following country?";
+        /* Put Correct Answer to the Array */
+        correctAnswer = countriesSelected[xP].food;
+        randomAnswers[0] = correctAnswer;
+        /* Generate Three Random Answers */
+        let loopRound = 1;
+        do {
+            randomAnswer = bankFood[Math.floor(Math.random() * bankFood.length)];
+            if (!randomAnswers.includes(randomAnswer)) {
+                randomAnswers[loopRound] = randomAnswer;
+                loopRound++;
+            }
+        } while (loopRound < 4);
+        /* Shuffle the Answers */
+        randomAnswers.sort(() => Math.random() - 0.5); /* This Code Was Taken From: https://javascript.info/task/shuffle — Wiktoria Drezner, 16/05/2022 */
+        /* Set the Shuffled Answers */
+        quizAnswer01Elm.innerText = randomAnswers[0];
+        quizAnswer02Elm.innerText = randomAnswers[1];
+        quizAnswer03Elm.innerText = randomAnswers[2];
+        quizAnswer04Elm.innerText = randomAnswers[3];
+    } else if ([4, 8, 12].includes(questionCounter)) {
+        parameter03TopicElm.innerText = "Population";
+        quizQuestionElm.innerHTML = "What is the population of the following country?";
+        /* Put Correct Answer to the Array */
+        correctAnswer = countriesSelected[xP].population;
+        randomAnswers[0] = correctAnswer;
+        /* Generate Three Random Answers */
+        let loopRound = 1;
+        do {
+            randomAnswer = bankPopulation[Math.floor(Math.random() * bankPopulation.length)];
+            if (!randomAnswers.includes(randomAnswer)) {
+                randomAnswers[loopRound] = randomAnswer;
+                loopRound++;
+            }
+        } while (loopRound < 4);
+        /* Shuffle the Answers */
+        randomAnswers.sort(() => Math.random() - 0.5); /* This Code Was Taken From: https://javascript.info/array-methods — Wiktoria Drezner, 16/05/2022 */
+        /* Set the Shuffled Answers */
+        quizAnswer01Elm.innerText = randomAnswers[0];
+        quizAnswer02Elm.innerText = randomAnswers[1];
+        quizAnswer03Elm.innerText = randomAnswers[2];
+        quizAnswer04Elm.innerText = randomAnswers[3];
+    }
+}
 
 function gameStep02() {
     const sectionGameElm = document.querySelector(".sectionGame");
@@ -451,9 +567,9 @@ function gameStep02() {
     parameter01TextBoldElm.classList.add("parameterTextBold");
     parameter01TextBoldElm.innerHTML = "QUESTION:";
     quizParameter01Elm.appendChild(parameter01TextBoldElm);
-    let parameter01QuestionNrElm = document.createElement("div"); /* Will be Updated */
+    parameter01QuestionNrElm = document.createElement("div"); /* Will be Updated */
     parameter01QuestionNrElm.setAttribute("id", "parameterQuestionNr");
-    parameter01QuestionNrElm.innerText = questionCounter + 1;
+    // parameter01QuestionNrElm.innerText = questionCounter + 1;
     quizParameter01Elm.appendChild(parameter01QuestionNrElm);
     quizParametersElm.appendChild(quizParameter01Elm);
     /* HTML Element: Quiz Parameter 2 */
@@ -463,9 +579,9 @@ function gameStep02() {
     parameter02TextBoldElm.classList.add("parameterTextBold");
     parameter02TextBoldElm.innerHTML = "COUNTRY:";
     quizParameter02Elm.appendChild(parameter02TextBoldElm);
-    let parameter02CountryElm = document.createElement("div"); /* Will be Updated */
+    parameter02CountryElm = document.createElement("div"); /* Will be Updated */
     parameter02CountryElm.setAttribute("id", "parameterCountry");
-    parameter02CountryElm.innerText = countriesSelected[0].country;
+    // parameter02CountryElm.innerText = countriesSelected[0].country;
     quizParameter02Elm.appendChild(parameter02CountryElm);
     quizParametersElm.appendChild(quizParameter02Elm);
     /* HTML Element: Quiz Parameter 3 */
@@ -475,39 +591,35 @@ function gameStep02() {
     parameter03TextBoldElm.classList.add("parameterTextBold");
     parameter03TextBoldElm.innerHTML = "TOPIC:";
     quizParameter03Elm.appendChild(parameter03TextBoldElm);
-    let parameter03TopicElm = document.createElement("div"); /* Will be Updated */
+    parameter03TopicElm = document.createElement("div"); /* Will be Updated */
     parameter03TopicElm.setAttribute("id", "parameterTopic");
-    parameter03TopicElm.innerText = "Capital City";
+    // parameter03TopicElm.innerText = "Capital City";
     quizParameter03Elm.appendChild(parameter03TopicElm);
     quizParametersElm.appendChild(quizParameter03Elm);
     /* HTML Element: Quiz Question */
-    let quizQuestionElm = document.createElement("div"); /* Will be Updated */
+    quizQuestionElm = document.createElement("div"); /* Will be Updated */
     quizQuestionElm.classList.add("quizQuestion");
-    quizQuestionElm.innerHTML = "What is the capital city of the following country?";
+    // quizQuestionElm.innerHTML = "What is the capital city of the following country?";
     sectionGameStep02Elm.appendChild(quizQuestionElm);
     /* HTML Element: Quiz Answers */
     const quizAnswersElm = document.createElement("div");
     quizAnswersElm.classList.add("quizAnswers");
     sectionGameStep02Elm.appendChild(quizAnswersElm);
     /* HTML Element: Quiz Answer 1 */
-    let quizAnswer01Elm = document.createElement("button"); /* Will be Updated */
+    quizAnswer01Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer01Elm.setAttribute("id", "quizAnswer01");
-    quizAnswer01Elm.innerText = answer01;
     quizAnswersElm.appendChild(quizAnswer01Elm);
     /* HTML Element: Quiz Answer 2 */
-    let quizAnswer02Elm = document.createElement("button"); /* Will be Updated */
+    quizAnswer02Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer02Elm.setAttribute("id", "quizAnswer02");
-    quizAnswer02Elm.innerText = answer02;
     quizAnswersElm.appendChild(quizAnswer02Elm);
     /* HTML Element: Quiz Answer 3 */
-    let quizAnswer03Elm = document.createElement("button"); /* Will be Updated */
+    quizAnswer03Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer03Elm.setAttribute("id", "quizAnswer03");
-    quizAnswer03Elm.innerText = answer03;
     quizAnswersElm.appendChild(quizAnswer03Elm);
     /* HTML Element: Quiz Answer 4 */
-    let quizAnswer04Elm = document.createElement("button"); /* Will be Updated */
+    quizAnswer04Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer04Elm.setAttribute("id", "quizAnswer04");
-    quizAnswer04Elm.innerText = answer04;
     quizAnswersElm.appendChild(quizAnswer04Elm);
     /* HTML Element: Button to Continue */
     const buttonStep02Elm = document.createElement("button");
@@ -516,12 +628,11 @@ function gameStep02() {
     buttonStep02Elm.innerHTML = "Next Question";
     sectionGameStep02Elm.appendChild(buttonStep02Elm);
 
+    /* Generate First Question + Answers */
+    generateAnswers();
+
     /* Begin the Quiz */
     buttonStep02Elm.addEventListener("click", () => {
-        /* Update Question Number Parameter */
-        questionCounter++;
-        parameter01QuestionNrElm.innerText = questionCounter + 1; /* Actual Question != 0 */
-
         /* Proceed to Results */
         if (questionCounter === 11) {
             buttonStep02Elm.innerHTML = "Proceed to Results";
@@ -529,38 +640,8 @@ function gameStep02() {
             sectionGameElm.removeChild(sectionGameStep02Elm);
             gameStep03();
         }
-
-        /* Set Country Parameter Depending on Question Number */
-        if (questionCounter <= 3) {
-            parameter02CountryElm.innerText = countriesSelected[0].country;
-        } else if (questionCounter >= 4 && questionCounter <= 7) {
-            parameter02CountryElm.innerText = countriesSelected[1].country;
-        } else if (questionCounter >= 8) {
-            parameter02CountryElm.innerText = countriesSelected[2].country;
-        }
-
-        /* Set Topic Parameter Depending on Question Number */
-        if (questionCounter === 0 || questionCounter === 4 || questionCounter === 8) {
-            parameter03TopicElm.innerText = "Capital City";
-            quizQuestionElm.innerHTML = "What is the capital city of the following country?";
-            /* Get the Name of Correct Answer (Capital City) */
-            correctAnswer = countriesSelected[xP].capital;
-        } else if (questionCounter === 1 || questionCounter === 5 || questionCounter === 9) {
-            parameter03TopicElm.innerText = "Flag";
-            quizQuestionElm.innerHTML = "What is the flag of the following country?";
-            /* Get the Name of Correct Answer (Flag) */
-            correctAnswer = countriesSelected[xP].flag;
-        } else if (questionCounter === 2 || questionCounter === 6 || questionCounter === 10) {
-            parameter03TopicElm.innerText = "Famous Food";
-            quizQuestionElm.innerHTML = "What is the famous food in the following country?";
-            /* Get the Name of Correct Answer (Famous Food) */
-            correctAnswer = countriesSelected[xP].food;
-        } else if (questionCounter === 3 || questionCounter === 7 || questionCounter === 11) {
-            parameter03TopicElm.innerText = "Population";
-            quizQuestionElm.innerHTML = "What is the population of the following country?";
-            /* Get the Name of Correct Answer (Population) */
-            correctAnswer = countriesSelected[xP].population;
-        }
+        /* Generate Next Question + Answers */
+        generateAnswers();
     });
 }
 
@@ -593,12 +674,11 @@ window.addEventListener("load", () => {
         }
     });
 
-    /* Begin Game: Choose Countries */
+    /* Proceed to Country Selection */
     gameStep01();
 
     /* Update Score */
     actionScore();
-
     /* Display Current Points */
     actionPoints();
 
