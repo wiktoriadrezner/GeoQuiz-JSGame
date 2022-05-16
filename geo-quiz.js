@@ -197,29 +197,6 @@ function updateScore() {
     scoreHighestValueElm.innerText = scoreHighest;
 }
 
-function actionJoker() {
-    /* Jokers Available */
-    const jokersAvailableElm = document.querySelector("#jokersAvailable");
-    const jokerAvailableElm = document.createElement("div");
-    jokerAvailableElm.setAttribute("id", "jokerAvailable");
-    jokerAvailableElm.innerHTML = "⏱️";
-    /* Add an Available Joker */
-    jokersAvailableElm.appendChild(jokerAvailableElm);
-    /* Jokers Purchased */
-    const jokersPurchasedElm = document.querySelector("#jokersUsed");
-    const jokerPurchasedElm = document.createElement("div");
-    jokerPurchasedElm.setAttribute("id", "jokerUsed");
-    jokerPurchasedElm.innerHTML = "⏱️";
-
-    /* Purchase an Available Joker */
-    jokerAvailableElm.addEventListener("click", () => {
-        /* Delete Joker From Available List */
-        jokersAvailableElm.removeChild(jokerAvailableElm);
-        /* Add a Joker to Purchased */
-        jokersPurchasedElm.appendChild(jokerPurchasedElm);
-    });
-}
-
 let indexSelected = 0;
 let countriesSelected = [];
 function selectCountries() {
@@ -411,6 +388,7 @@ function gameStep01() {
 
 let answersCorrect = 0;
 let answersWrong = 0;
+let answerClickCounter = 0;
 function addAnswerClass() {
     const quizAnswerElm = document.querySelectorAll(".quizAnswer");
     for (let i = 0; i < quizAnswerElm.length; i++) {
@@ -543,27 +521,60 @@ function generateAnswers() {
     }
 }
 
+let jokerCounter = 0; /* Variable That Holds the Points For Joker */
+function actionJoker() {
+    /* Jokers Available */
+    const jokersAvailableElm = document.querySelector("#jokersAvailable");
+    const jokerAvailableElm = document.createElement("div");
+    jokerAvailableElm.setAttribute("id", "jokerAvailable");
+    jokerAvailableElm.innerHTML = "⏱️";
+    /* Jokers Purchased */
+    const jokersPurchasedElm = document.querySelector("#jokersUsed");
+    const jokerPurchasedElm = document.createElement("div");
+    jokerPurchasedElm.setAttribute("id", "jokerUsed");
+    jokerPurchasedElm.innerHTML = "⏱️";
+
+    /* Add an Available Joker */
+    if (jokerCounter >= 1200) {
+        jokersAvailableElm.appendChild(jokerAvailableElm);
+        jokerCounter -= 1200;
+    }
+
+    /* Use an Available Joker */
+    jokerAvailableElm.addEventListener("click", () => {
+        /* Delete Joker From Available List */
+        jokersAvailableElm.removeChild(jokerAvailableElm);
+        /* Move Joker to Used */
+        jokersPurchasedElm.appendChild(jokerPurchasedElm);
+    });
+}
+
 let points = 0;
 const pointsElm = document.querySelector("#points");
 pointsElm.innerText = points;
 function updatePoints() {
-    console.log("ENTERED");
     if (parameter03TopicElm.innerText === "Capital City") {
         points += 150;
+        jokerCounter += 150;
         pointsElm.innerText = points;
     } else if (parameter03TopicElm.innerText === "Flag") {
         points += 200;
+        jokerCounter += 200;
         pointsElm.innerText = points;
     } else if (parameter03TopicElm.innerText === "Famous Food") {
         points += 300;
+        jokerCounter += 300;
         pointsElm.innerText = points;
     } else if (parameter03TopicElm.innerText === "Population") {
         points += 250;
+        jokerCounter += 250;
         pointsElm.innerText = points;
     }
+    actionJoker();
 }
 
 /* Step 2: Quiz */
+let answerSelected = 0;
 function gameStep02() {
     const sectionGameElm = document.querySelector(".sectionGame");
     const sectionGameStep02Elm = document.querySelector("#sectionGameStep02");
@@ -662,18 +673,31 @@ function gameStep02() {
             gameStep03();
         }
         /* Generate Next Question + Answers */
-        generateAnswers();
+        if (answerSelected === 1) {
+            generateAnswers();
+            answerSelected = 0;
+        } else {
+            alert("Select an answer before moving to another question");
+            return;
+        }
+        /* Reset Click Counter */
+        answerClickCounter = 0;
     });
 
     /* Select an Answer */
     const quizAnswerElm = document.querySelectorAll(".quizAnswer");
     for (let i = 0; i < quizAnswerElm.length; i++) {
         quizAnswerElm[i].addEventListener("click", () => {
+            answerSelected = 1;
+            answerClickCounter++;
             if (quizAnswerElm[i].innerText === correctAnswer) {
                 /* The Answer Is Correct */
                 quizAnswerElm[i].classList.add("quizAnswerCorrect");
                 answersCorrect++;
-                updatePoints();
+                /* Check Click Counter to Prevent Double Clicking */
+                if (answerClickCounter === 1) {
+                    updatePoints();
+                }
             } else {
                 /* The Answer Is Wrong */
                 quizAnswerElm[i].classList.add("quizAnswerWrong");
@@ -718,7 +742,4 @@ window.addEventListener("load", () => {
 
     /* Proceed to Country Selection */
     gameStep01();
-
-    /* Joker */
-    actionJoker();
 });
