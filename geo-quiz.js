@@ -163,14 +163,75 @@ let bankPopulation = [
 ];
 
 let points = 0;
-function actionPoints() {
+function updatePoints() {
     const pointsElm = document.querySelector("#points");
     pointsElm.innerText = points;
 }
 
+let currentPlayer = "NONE";
+function updatePlayer(valuePlayer) {
+    /* Player */
+    const playerElm = document.querySelector("#player");
+    const playerInputElm = document.createElement("div");
+    playerInputElm.classList.add("playerInput");
+    playerInputElm.innerText = valuePlayer;
+    playerElm.appendChild(playerInputElm);
+    const playerDeleteElm = document.createElement("button");
+    playerDeleteElm.classList.add("playerDelete");
+    playerDeleteElm.innerHTML = "❌";
+    playerElm.appendChild(playerDeleteElm);
+    /* Delete Current Player */
+    playerDeleteElm.addEventListener("click", () => {
+        playerElm.removeChild(playerInputElm);
+        playerElm.removeChild(playerDeleteElm);
+        /* Set Current Player to NONE */
+        currentPlayer = "NONE";
+    });
+}
+
+let scorePlayer = 0;
+let scoreHighest = 0;
+function updateScore() {
+    /* Player Score */
+    const scorePlayerElm = document.querySelector("#scorePlayer");
+    const scorePlayerValueElm = document.createElement("div");
+    scorePlayerValueElm.classList.add("scorePlayerValue");
+    scorePlayerValueElm.innerText = scorePlayer;
+    scorePlayerElm.appendChild(scorePlayerValueElm);
+    /* Highest Score */
+    const scoreHighestElm = document.querySelector("#scoreHighest");
+    const scoreHighestValueElm = document.createElement("div");
+    scoreHighestValueElm.classList.add("scoreHighestValue");
+    scoreHighestValueElm.innerText = scoreHighest;
+    scoreHighestElm.appendChild(scoreHighestValueElm);
+}
+
+function actionJoker() {
+    /* Jokers Available */
+    const jokersAvailableElm = document.querySelector("#jokersAvailable");
+    const jokerAvailableElm = document.createElement("div");
+    jokerAvailableElm.setAttribute("id", "jokerAvailable");
+    jokerAvailableElm.innerHTML = "⏱️";
+    /* Add an Available Joker */
+    jokersAvailableElm.appendChild(jokerAvailableElm);
+    /* Jokers Purchased */
+    const jokersPurchasedElm = document.querySelector("#jokersUsed");
+    const jokerPurchasedElm = document.createElement("div");
+    jokerPurchasedElm.setAttribute("id", "jokerUsed");
+    jokerPurchasedElm.innerHTML = "⏱️";
+
+    /* Purchase an Available Joker */
+    jokerAvailableElm.addEventListener("click", () => {
+        /* Delete Joker From Available List */
+        jokersAvailableElm.removeChild(jokerAvailableElm);
+        /* Add a Joker to Purchased */
+        jokersPurchasedElm.appendChild(jokerPurchasedElm);
+    });
+}
+
 let indexSelected = 0;
 let countriesSelected = [];
-function actionCountry() {
+function selectCountries() {
     /* Country 1 */
     if (indexSelected === 1) {
         const country01Elm = document.querySelector("#country01");
@@ -207,67 +268,6 @@ function actionCountry() {
             }
         }
     }
-}
-
-let currentPlayer = "NONE";
-function actionPlayer(valuePlayer) {
-    /* Player */
-    const playerElm = document.querySelector("#player");
-    const playerInputElm = document.createElement("div");
-    playerInputElm.classList.add("playerInput");
-    playerInputElm.innerText = valuePlayer;
-    playerElm.appendChild(playerInputElm);
-    const playerDeleteElm = document.createElement("button");
-    playerDeleteElm.classList.add("playerDelete");
-    playerDeleteElm.innerHTML = "❌";
-    playerElm.appendChild(playerDeleteElm);
-    /* Delete Current Player */
-    playerDeleteElm.addEventListener("click", () => {
-        playerElm.removeChild(playerInputElm);
-        playerElm.removeChild(playerDeleteElm);
-        /* Set Current Player to NONE */
-        currentPlayer = "NONE";
-    });
-}
-
-let scorePlayer = 0;
-let scoreHighest = 0;
-function actionScore() {
-    /* Player Score */
-    const scorePlayerElm = document.querySelector("#scorePlayer");
-    const scorePlayerValueElm = document.createElement("div");
-    scorePlayerValueElm.classList.add("scorePlayerValue");
-    scorePlayerValueElm.innerText = scorePlayer;
-    scorePlayerElm.appendChild(scorePlayerValueElm);
-    /* Highest Score */
-    const scoreHighestElm = document.querySelector("#scoreHighest");
-    const scoreHighestValueElm = document.createElement("div");
-    scoreHighestValueElm.classList.add("scoreHighestValue");
-    scoreHighestValueElm.innerText = scoreHighest;
-    scoreHighestElm.appendChild(scoreHighestValueElm);
-}
-
-function actionJoker() {
-    /* Jokers Available */
-    const jokersAvailableElm = document.querySelector("#jokersAvailable");
-    const jokerAvailableElm = document.createElement("div");
-    jokerAvailableElm.setAttribute("id", "jokerAvailable");
-    jokerAvailableElm.innerHTML = "⏱️";
-    /* Add an Available Joker */
-    jokersAvailableElm.appendChild(jokerAvailableElm);
-    /* Jokers Purchased */
-    const jokersPurchasedElm = document.querySelector("#jokersPurchased");
-    const jokerPurchasedElm = document.createElement("div");
-    jokerPurchasedElm.setAttribute("id", "jokerPurchased");
-    jokerPurchasedElm.innerHTML = "⏱️";
-
-    /* Purchase an Available Joker */
-    jokerAvailableElm.addEventListener("click", () => {
-        /* Delete Joker From Available List */
-        jokersAvailableElm.removeChild(jokerAvailableElm);
-        /* Add a Joker to Purchased */
-        jokersPurchasedElm.appendChild(jokerPurchasedElm);
-    });
 }
 
 /* Step 1: Select Countries */
@@ -391,7 +391,7 @@ function gameStep01() {
                 countriesSelected[indexSelected] = countryNameElm[i].innerText;
                 indexSelected++;
                 /* Set Countries List Based on Selection */
-                actionCountry();
+                selectCountries();
                 /* If Three Countries Are Selected, Lock the Remaining Countries */
                 if (indexSelected === 3) {
                     for (let i = 0; i < countryNameElm.length; i++) {
@@ -418,27 +418,52 @@ function gameStep01() {
     });
 }
 
-/* Step 2: Quiz */
-/* Answers Counter */
 let answersCorrect = 0;
 let answersWrong = 0;
-/* Question Counter */
-let questionCounter = 0;
-let xP = 0;
-/* Set Answers */
+function addAnswerClass() {
+    const quizAnswerElm = document.querySelectorAll(".quizAnswer");
+    for (let i = 0; i < quizAnswerElm.length; i++) {
+        if (quizAnswerElm[i].innerText === correctAnswer) {
+            quizAnswerElm[i].classList.add("quizAnswerCorrect");
+        } else if (!quizAnswerElm[i].classList.contains("quizAnswerCorrect")) {
+            quizAnswerElm[i].classList.add("quizAnswerWrong");
+        }
+    }
+}
+
+function clearAnswerClass() {
+    /* Loop Through Other Answers */
+    const quizAnswerElm = document.querySelectorAll(".quizAnswer");
+    for (let i = 0; i < quizAnswerElm.length; i++) {
+        if (quizAnswerElm[i].classList.contains("quizAnswerCorrect")) {
+            quizAnswerElm[i].classList.remove("quizAnswerCorrect");
+        }
+        if (quizAnswerElm[i].classList.contains("quizAnswerWrong")) {
+            quizAnswerElm[i].classList.remove("quizAnswerWrong");
+        }
+    }
+}
+
 let correctAnswer;
-
-let elementGenerated;
-
-/* Random Answers */
 let randomAnswer;
 let randomAnswers = [];
-
-let quizQuestionElm;
 let quizAnswer01Elm, quizAnswer02Elm, quizAnswer03Elm, quizAnswer04Elm;
-let parameter01QuestionNrElm, parameter02CountryElm, parameter03TopicElm;
+function shuffleAnswers() {
+    randomAnswers.sort(() => Math.random() - 0.5); /* This Code Was Taken From: https://javascript.info/array-methods — Wiktoria Drezner, 16/05/2022 */
+    /* Set the Shuffled Answers */
+    quizAnswer01Elm.innerText = randomAnswers[0];
+    quizAnswer02Elm.innerText = randomAnswers[1];
+    quizAnswer03Elm.innerText = randomAnswers[2];
+    quizAnswer04Elm.innerText = randomAnswers[3];
+}
 
+let xP = 0; /* Country Counter */
+let questionCounter = 0;
+let quizQuestionElm, parameter01QuestionNrElm, parameter02CountryElm, parameter03TopicElm;
 function generateAnswers() {
+    /* Clear Answers' Correct/Wrong Class */
+    clearAnswerClass();
+
     /* Increase Question Number */
     questionCounter++;
     parameter01QuestionNrElm.innerText = questionCounter;
@@ -472,12 +497,7 @@ function generateAnswers() {
             }
         } while (loopRound < 4);
         /* Shuffle the Answers */
-        randomAnswers.sort(() => Math.random() - 0.5); /* This Code Was Taken From: https://javascript.info/array-methods — Wiktoria Drezner, 16/05/2022 */
-        /* Set the Shuffled Answers */
-        quizAnswer01Elm.innerText = randomAnswers[0];
-        quizAnswer02Elm.innerText = randomAnswers[1];
-        quizAnswer03Elm.innerText = randomAnswers[2];
-        quizAnswer04Elm.innerText = randomAnswers[3];
+        shuffleAnswers();
     } else if ([2, 6, 10].includes(questionCounter)) {
         parameter03TopicElm.innerText = "Flag";
         quizQuestionElm.innerHTML = "What is the flag of the following country?";
@@ -494,12 +514,7 @@ function generateAnswers() {
             }
         } while (loopRound < 4);
         /* Shuffle the Answers */
-        randomAnswers.sort(() => Math.random() - 0.5); /* This Code Was Taken From: https://javascript.info/array-methods — Wiktoria Drezner, 16/05/2022 */
-        /* Set the Shuffled Answers */
-        quizAnswer01Elm.innerText = randomAnswers[0];
-        quizAnswer02Elm.innerText = randomAnswers[1];
-        quizAnswer03Elm.innerText = randomAnswers[2];
-        quizAnswer04Elm.innerText = randomAnswers[3];
+        shuffleAnswers();
     } else if ([3, 7, 11].includes(questionCounter)) {
         parameter03TopicElm.innerText = "Famous Food";
         quizQuestionElm.innerHTML = "What is the famous food in the following country?";
@@ -516,12 +531,7 @@ function generateAnswers() {
             }
         } while (loopRound < 4);
         /* Shuffle the Answers */
-        randomAnswers.sort(() => Math.random() - 0.5); /* This Code Was Taken From: https://javascript.info/task/shuffle — Wiktoria Drezner, 16/05/2022 */
-        /* Set the Shuffled Answers */
-        quizAnswer01Elm.innerText = randomAnswers[0];
-        quizAnswer02Elm.innerText = randomAnswers[1];
-        quizAnswer03Elm.innerText = randomAnswers[2];
-        quizAnswer04Elm.innerText = randomAnswers[3];
+        shuffleAnswers();
     } else if ([4, 8, 12].includes(questionCounter)) {
         parameter03TopicElm.innerText = "Population";
         quizQuestionElm.innerHTML = "What is the population of the following country?";
@@ -538,15 +548,11 @@ function generateAnswers() {
             }
         } while (loopRound < 4);
         /* Shuffle the Answers */
-        randomAnswers.sort(() => Math.random() - 0.5); /* This Code Was Taken From: https://javascript.info/array-methods — Wiktoria Drezner, 16/05/2022 */
-        /* Set the Shuffled Answers */
-        quizAnswer01Elm.innerText = randomAnswers[0];
-        quizAnswer02Elm.innerText = randomAnswers[1];
-        quizAnswer03Elm.innerText = randomAnswers[2];
-        quizAnswer04Elm.innerText = randomAnswers[3];
+        shuffleAnswers();
     }
 }
 
+/* Step 2: Quiz */
 function gameStep02() {
     const sectionGameElm = document.querySelector(".sectionGame");
     const sectionGameStep02Elm = document.querySelector("#sectionGameStep02");
@@ -608,18 +614,22 @@ function gameStep02() {
     /* HTML Element: Quiz Answer 1 */
     quizAnswer01Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer01Elm.setAttribute("id", "quizAnswer01");
+    quizAnswer01Elm.classList.add("quizAnswer");
     quizAnswersElm.appendChild(quizAnswer01Elm);
     /* HTML Element: Quiz Answer 2 */
     quizAnswer02Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer02Elm.setAttribute("id", "quizAnswer02");
+    quizAnswer02Elm.classList.add("quizAnswer");
     quizAnswersElm.appendChild(quizAnswer02Elm);
     /* HTML Element: Quiz Answer 3 */
     quizAnswer03Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer03Elm.setAttribute("id", "quizAnswer03");
+    quizAnswer03Elm.classList.add("quizAnswer");
     quizAnswersElm.appendChild(quizAnswer03Elm);
     /* HTML Element: Quiz Answer 4 */
     quizAnswer04Elm = document.createElement("button"); /* Will be Updated */
     quizAnswer04Elm.setAttribute("id", "quizAnswer04");
+    quizAnswer04Elm.classList.add("quizAnswer");
     quizAnswersElm.appendChild(quizAnswer04Elm);
     /* HTML Element: Button to Continue */
     const buttonStep02Elm = document.createElement("button");
@@ -631,7 +641,7 @@ function gameStep02() {
     /* Generate First Question + Answers */
     generateAnswers();
 
-    /* Begin the Quiz */
+    /* Proceed to Next Question */
     buttonStep02Elm.addEventListener("click", () => {
         /* Proceed to Results */
         if (questionCounter === 11) {
@@ -643,6 +653,23 @@ function gameStep02() {
         /* Generate Next Question + Answers */
         generateAnswers();
     });
+
+    /* Select an Answer */
+    const quizAnswerElm = document.querySelectorAll(".quizAnswer");
+    for (let i = 0; i < quizAnswerElm.length; i++) {
+        quizAnswerElm[i].addEventListener("click", () => {
+            if (this.innerText === correctAnswer) {
+                /* The Answer Is Correct */
+                quizAnswerElm[i].classList.add("quizAnswerCorrect");
+                answersCorrect++;
+            } else {
+                /* The Answer Is Wrong */
+                quizAnswerElm[i].classList.add("quizAnswerWrong");
+                answersWrong++;
+            }
+            addAnswerClass();
+        });
+    }
 }
 
 /* Step 3: Results */
@@ -664,7 +691,7 @@ window.addEventListener("load", () => {
             /* Save Added Player to Current Player */
             currentPlayer = playerInputElement.value;
             /* Call Function to Add/Delete Player */
-            actionPlayer(currentPlayer);
+            updatePlayer(currentPlayer);
             /* Clear Player Input */
             playerInputElement.value = "";
         } else if (currentPlayer !== "NONE") {
@@ -678,16 +705,11 @@ window.addEventListener("load", () => {
     gameStep01();
 
     /* Update Score */
-    actionScore();
+    updateScore();
+
     /* Display Current Points */
-    actionPoints();
+    updatePoints();
 
     /* Joker */
-    for (i = 0; i < 15; i++) {
-        /* Add a Joker if Player Answered 4/8/12 Questions Correctly */
-        if ([4, 8, 12].includes(answersCorrect)) {
-            actionJoker();
-        }
-        answersCorrect++;
-    }
+    actionJoker();
 });

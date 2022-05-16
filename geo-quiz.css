@@ -194,10 +194,7 @@ section {
     grid-row-gap: 20px;
     text-align: center;
 }
-#quizAnswer01,
-#quizAnswer02,
-#quizAnswer03,
-#quizAnswer04 {
+.quizAnswer {
     margin: 0 24px 0 24px;
     height: 60px;
     background-color: var(--color-06);
@@ -206,11 +203,11 @@ section {
     cursor: pointer;
     font-size: 1.1em;
 }
-.quizAnswerCorrect {
-    background-color: var(--color-01);
-}
 .quizAnswerWrong {
     background-color: var(--color-04);
+}
+.quizAnswerCorrect {
+    background-color: var(--color-01);
 }
 
 /* Button to Continue the Game */
@@ -317,7 +314,7 @@ section {
     grid-area: 3 / 4 / 4 / 5;
 }
 #jokersAvailable,
-#jokersPurchased,
+#jokersUsed,
 .jokerHolder {
     display: flex;
     align-items: center;
@@ -329,7 +326,7 @@ section {
     font-size: 1.1em;
 }
 #jokerAvailable,
-#jokerPurchased {
+#jokerUsed {
     margin: 0 8px 0 0;
     font-size: 13px;
     cursor: pointer;
