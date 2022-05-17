@@ -166,6 +166,7 @@ let bankPopulation = [
 /* Update Local Storage */
 
 let currentPlayer = "NONE";
+let gameProceeded = 0;
 function updatePlayer(valuePlayer) {
     /* Player */
     const playerElm = document.querySelector("#player");
@@ -179,10 +180,16 @@ function updatePlayer(valuePlayer) {
     playerElm.appendChild(playerDeleteElm);
     /* Delete Current Player */
     playerDeleteElm.addEventListener("click", () => {
-        playerElm.removeChild(playerInputElm);
-        playerElm.removeChild(playerDeleteElm);
-        /* Set Current Player to NONE */
-        currentPlayer = "NONE";
+        if (gameProceeded === 0) {
+            playerElm.removeChild(playerInputElm);
+            playerElm.removeChild(playerDeleteElm);
+            /* Set Current Player to NONE */
+            currentPlayer = "NONE";
+        } else if (gameProceeded === 1) {
+            /* Prevent Deleting a Player if the Game Has Started */
+            alert("Deleting a current player is unavailable, because you already selected a country.");
+            return;
+        }
     });
 }
 
@@ -357,6 +364,7 @@ function gameStep01() {
                 alert("Before choosing the countries for the game, please add the player.");
                 return;
             } else if (indexSelected !== 3) {
+                gameProceeded = 1;
                 /* Select Only Three Elements */
                 countryNameElm[i].classList.add("countryNameSelected");
                 countriesSelected[indexSelected] = countryNameElm[i].innerText;
@@ -859,8 +867,6 @@ function gameStep03() {
     /* Restart the Game */
     buttonStep03Elm.addEventListener("click", () => {
         location.reload();
-        /* Call Function to Add/Delete Player */
-        updatePlayer(currentPlayer);
     });
 }
 
