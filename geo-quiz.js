@@ -162,6 +162,9 @@ let bankPopulation = [
     "220.9 million",
 ];
 
+/* Update Session Storage */
+/* Update Local Storage */
+
 let currentPlayer = "NONE";
 function updatePlayer(valuePlayer) {
     /* Player */
@@ -388,7 +391,7 @@ function gameStep01() {
 
 let answersCorrect = 0;
 let answersWrong = 0;
-let answerClickCounter = 0;
+let answersStorage = []; /* Array to Display Answers After the Game */
 function addAnswerClass() {
     const quizAnswerElm = document.querySelectorAll(".quizAnswer");
     for (let i = 0; i < quizAnswerElm.length; i++) {
@@ -575,6 +578,7 @@ function updatePoints() {
 
 /* Step 2: Quiz */
 let answerSelected = 0;
+let answerClickCounter = 0;
 function gameStep02() {
     const sectionGameElm = document.querySelector(".sectionGame");
     const sectionGameStep02Elm = document.querySelector("#sectionGameStep02");
@@ -597,7 +601,6 @@ function gameStep02() {
     quizParameter01Elm.appendChild(parameter01TextBoldElm);
     parameter01QuestionNrElm = document.createElement("div"); /* Will be Updated */
     parameter01QuestionNrElm.setAttribute("id", "parameterQuestionNr");
-    // parameter01QuestionNrElm.innerText = questionCounter + 1;
     quizParameter01Elm.appendChild(parameter01QuestionNrElm);
     quizParametersElm.appendChild(quizParameter01Elm);
     /* HTML Element: Quiz Parameter 2 */
@@ -609,7 +612,6 @@ function gameStep02() {
     quizParameter02Elm.appendChild(parameter02TextBoldElm);
     parameter02CountryElm = document.createElement("div"); /* Will be Updated */
     parameter02CountryElm.setAttribute("id", "parameterCountry");
-    // parameter02CountryElm.innerText = countriesSelected[0].country;
     quizParameter02Elm.appendChild(parameter02CountryElm);
     quizParametersElm.appendChild(quizParameter02Elm);
     /* HTML Element: Quiz Parameter 3 */
@@ -621,13 +623,11 @@ function gameStep02() {
     quizParameter03Elm.appendChild(parameter03TextBoldElm);
     parameter03TopicElm = document.createElement("div"); /* Will be Updated */
     parameter03TopicElm.setAttribute("id", "parameterTopic");
-    // parameter03TopicElm.innerText = "Capital City";
     quizParameter03Elm.appendChild(parameter03TopicElm);
     quizParametersElm.appendChild(quizParameter03Elm);
     /* HTML Element: Quiz Question */
     quizQuestionElm = document.createElement("div"); /* Will be Updated */
     quizQuestionElm.classList.add("quizQuestion");
-    // quizQuestionElm.innerHTML = "What is the capital city of the following country?";
     sectionGameStep02Elm.appendChild(quizQuestionElm);
     /* HTML Element: Quiz Answers */
     const quizAnswersElm = document.createElement("div");
@@ -665,6 +665,7 @@ function gameStep02() {
 
     /* Proceed to Next Question */
     buttonStep02Elm.addEventListener("click", () => {
+        buttonStep02Elm.classList.remove("buttonUnlocked");
         /* Proceed to Results */
         if (questionCounter === 11) {
             buttonStep02Elm.innerHTML = "Proceed to Results";
@@ -676,42 +677,191 @@ function gameStep02() {
         if (answerSelected === 1) {
             generateAnswers();
             answerSelected = 0;
+            /* Reset Click Counter */
+            answerClickCounter = 0;
         } else {
             alert("Select an answer before moving to another question");
             return;
         }
-        /* Reset Click Counter */
-        answerClickCounter = 0;
     });
 
     /* Select an Answer */
     const quizAnswerElm = document.querySelectorAll(".quizAnswer");
     for (let i = 0; i < quizAnswerElm.length; i++) {
         quizAnswerElm[i].addEventListener("click", () => {
+            buttonStep02Elm.classList.add("buttonUnlocked");
             answerSelected = 1;
             answerClickCounter++;
-            if (quizAnswerElm[i].innerText === correctAnswer) {
-                /* The Answer Is Correct */
-                quizAnswerElm[i].classList.add("quizAnswerCorrect");
-                answersCorrect++;
-                /* Check Click Counter to Prevent Double Clicking */
-                if (answerClickCounter === 1) {
+            if (answerClickCounter === 1) {
+                if (quizAnswerElm[i].innerText === correctAnswer) {
+                    /* The Answer Is Correct */
+                    quizAnswerElm[i].classList.add("quizAnswerCorrect");
+                    answersCorrect++;
+                    /* Push the Answer to the Storage */
+                    answersStorage.push({
+                        number: parameter01QuestionNrElm.innerText,
+                        country: parameter02CountryElm.innerText,
+                        topic: parameter03TopicElm.innerText,
+                        answer: quizAnswerElm[i].innerText,
+                        status: "correct",
+                    });
+                    /* Update Points */
                     updatePoints();
+                } else {
+                    /* The Answer Is Wrong */
+                    quizAnswerElm[i].classList.add("quizAnswerWrong");
+                    answersWrong++;
+                    /* Push the Answer to the Storage */
+                    answersStorage.push({
+                        number: parameter01QuestionNrElm.innerText,
+                        country: parameter02CountryElm.innerText,
+                        topic: parameter03TopicElm.innerText,
+                        answer: quizAnswerElm[i].innerText,
+                        status: "wrong",
+                    });
                 }
-            } else {
-                /* The Answer Is Wrong */
-                quizAnswerElm[i].classList.add("quizAnswerWrong");
-                answersWrong++;
+                addAnswerClass();
             }
-            addAnswerClass();
         });
     }
 }
 
 /* Step 3: Results */
 function gameStep03() {
+    /* Update Player Score */
     scorePlayer = points;
     updateScore();
+
+    const sectionGameElm = document.querySelector(".sectionGame");
+    const sectionGameStep03Elm = document.querySelector("#sectionGameStep03");
+    sectionGameElm.appendChild(sectionGameStep03Elm);
+    /* HTML Element: Header */
+    const sectionHeaderElm = document.createElement("div");
+    sectionHeaderElm.classList.add("sectionHeader");
+    sectionHeaderElm.innerHTML = "Results of the Game";
+    sectionGameStep03Elm.appendChild(sectionHeaderElm);
+    /* HTML Element: Results Correct */
+    const resultsCorrectElm = document.createElement("div");
+    resultsCorrectElm.classList.add("resultsHolder");
+    const resultsCorrectTextElm = document.createElement("div");
+    resultsCorrectTextElm.classList.add("resultsHolderText");
+    resultsCorrectTextElm.innerHTML = "Correct Answers:";
+    resultsCorrectElm.appendChild(resultsCorrectTextElm);
+    let resultsCorrectValueElm = document.createElement("div");
+    resultsCorrectValueElm.setAttribute("id", "resultsCorrectValue");
+    resultsCorrectElm.appendChild(resultsCorrectValueElm);
+    sectionGameStep03Elm.appendChild(resultsCorrectElm);
+    /* HTML Element: Results Wrong */
+    const resultsWrongElm = document.createElement("div");
+    resultsWrongElm.classList.add("resultsHolder");
+    const resultsWrongTextElm = document.createElement("div");
+    resultsWrongTextElm.classList.add("resultsHolderText");
+    resultsWrongTextElm.innerHTML = "Wrong Answers:";
+    resultsWrongElm.appendChild(resultsWrongTextElm);
+    let resultsWrongValueElm = document.createElement("div");
+    resultsWrongValueElm.setAttribute("id", "resultsWrongValue");
+    resultsWrongElm.appendChild(resultsWrongValueElm);
+    sectionGameStep03Elm.appendChild(resultsWrongElm);
+    /* HTML Element: Results Headlines */
+    const resultsHeadlinesElm = document.createElement("div");
+    resultsHeadlinesElm.classList.add("resultsHeadlines");
+    /* HTML Element: Headline: Question Number */
+    const resultHeadline01Elm = document.createElement("div");
+    resultHeadline01Elm.classList.add("resultHeadline");
+    resultHeadline01Elm.innerHTML = "Question Number";
+    resultsHeadlinesElm.appendChild(resultHeadline01Elm);
+    /* HTML Element: Headline: Country */
+    const resultHeadline02Elm = document.createElement("div");
+    resultHeadline02Elm.classList.add("resultHeadline");
+    resultHeadline02Elm.innerHTML = "Country";
+    resultsHeadlinesElm.appendChild(resultHeadline02Elm);
+    /* HTML Element: Headline: Topic */
+    const resultHeadline03Elm = document.createElement("div");
+    resultHeadline03Elm.classList.add("resultHeadline");
+    resultHeadline03Elm.innerHTML = "Topic";
+    resultsHeadlinesElm.appendChild(resultHeadline03Elm);
+    /* HTML Element: Headline: Answer */
+    const resultHeadline04Elm = document.createElement("div");
+    resultHeadline04Elm.classList.add("resultHeadline");
+    resultHeadline04Elm.innerHTML = "Answer";
+    resultsHeadlinesElm.appendChild(resultHeadline04Elm);
+    /* HTML Element: Headline: Status */
+    const resultHeadline05Elm = document.createElement("div");
+    resultHeadline05Elm.classList.add("resultHeadline");
+    resultHeadline05Elm.innerHTML = "Status";
+    resultsHeadlinesElm.appendChild(resultHeadline05Elm);
+    sectionGameStep03Elm.appendChild(resultsHeadlinesElm);
+    /* HTML Element: Results List */
+    const resultsListElm = document.createElement("div");
+    resultsListElm.setAttribute("id", "resultsList");
+    sectionGameStep03Elm.appendChild(resultsListElm);
+    /* HTML Element: Button to Restart the Game */
+    const buttonHolderElm = document.createElement("div");
+    buttonHolderElm.classList.add("buttonHolder");
+    const buttonStep03Elm = document.createElement("button");
+    buttonStep03Elm.setAttribute("id", "buttonStep03");
+    buttonStep03Elm.classList.add("buttonUnlocked");
+    buttonStep03Elm.innerHTML = "Play Again";
+    buttonHolderElm.appendChild(buttonStep03Elm);
+    sectionGameStep03Elm.appendChild(buttonHolderElm);
+
+    /* Display Number of Correct/Wrong Answers */
+    resultsCorrectValueElm.innerText = answersCorrect;
+    resultsWrongValueElm.innerText = answersWrong;
+
+    /* Display Results Dynamically */
+    for (let i = 0; i < 12; i++) {
+        /* Add Value Dynamically: Question Number */
+        const resultQuestionElm = document.createElement("div");
+        let resultQuestionNameElm = "resultQuestion" + i; /* Dynamically Create an Id */
+        resultQuestionElm.classList.add("resultValue");
+        resultQuestionElm.setAttribute("id", resultQuestionNameElm);
+        resultQuestionElm.innerText = answersStorage[i].number;
+        resultsListElm.appendChild(resultQuestionElm);
+        /* Add Value Dynamically: Country */
+        const resultCountryElm = document.createElement("div");
+        let resultCountryNameElm = "resultCountry" + i; /* Dynamically Create an Id */
+        resultCountryElm.classList.add("resultValue");
+        resultCountryElm.setAttribute("id", resultCountryNameElm);
+        resultCountryElm.innerText = answersStorage[i].country;
+        resultsListElm.appendChild(resultCountryElm);
+        /* Add Value Dynamically: Topic */
+        const resultTopicElm = document.createElement("div");
+        let resultTopicNameElm = "resultTopic" + i; /* Dynamically Create an Id */
+        resultTopicElm.classList.add("resultValue");
+        resultTopicElm.setAttribute("id", resultTopicNameElm);
+        resultTopicElm.innerText = answersStorage[i].topic;
+        resultsListElm.appendChild(resultTopicElm);
+        /* Add Value Dynamically: Answer */
+        const resultAnswerElm = document.createElement("div");
+        let resultAnswerNameElm = "resultAnswer" + i; /* Dynamically Create an Id */
+        resultAnswerElm.classList.add("resultValue");
+        resultAnswerElm.setAttribute("id", resultAnswerNameElm);
+        resultAnswerElm.innerText = answersStorage[i].answer;
+        resultsListElm.appendChild(resultAnswerElm);
+        /* Add Value Dynamically: Status */
+        const resultStatusElm = document.createElement("div");
+        let resultStatusNameElm = "resultStatus" + i; /* Dynamically Create an Id */
+        resultStatusElm.classList.add("resultValue");
+        resultStatusElm.setAttribute("id", resultStatusNameElm);
+        resultStatusElm.innerText = answersStorage[i].status;
+        if (answersStorage[i].status === "correct") {
+            resultStatusElm.classList.add("resultValueCorrect");
+        } else {
+            resultStatusElm.classList.add("resultValueWrong");
+        }
+        resultsListElm.appendChild(resultStatusElm);
+        if (i === 3 || i === 7) {
+            resultStatusElm.classList.add("resultSpace");
+        }
+    }
+
+    /* Restart the Game */
+    buttonStep03Elm.addEventListener("click", () => {
+        location.reload();
+        /* Call Function to Add/Delete Player */
+        updatePlayer(currentPlayer);
+    });
 }
 
 window.addEventListener("load", () => {

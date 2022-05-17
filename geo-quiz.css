@@ -11,6 +11,7 @@
     --color-04: #ffaeaa; /* Light Red (Selected Content) */
     --color-05: #717171; /* Dark Grey (Locked Content) */
     --color-06: #e4ecea; /* Light Grey with a Tint of Blue */
+    --color-07: #546d57; /* Dark Green */
     scroll-behavior: smooth;
     box-sizing: border-box;
     font-family: Open Sans;
@@ -110,6 +111,7 @@ section {
 /* Section 4: Game Screen */
 .sectionGame {
     grid-area: 2 / 1 / 7 / 4;
+    margin-bottom: 12px;
 }
 
 /* Step 1: Select Countries */
@@ -210,29 +212,88 @@ section {
     background-color: var(--color-01);
 }
 
-/* Button to Continue the Game */
+/* Step 3: Results */
+#sectionGameStep03 {
+    padding: 0;
+}
+.resultsHolder {
+    display: flex;
+    align-items: center;
+    margin: 4px 0 0 0;
+}
+.resultsHolderText {
+    margin: 0 8px 0 23px;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.2em;
+}
+#resultsList,
+.resultsHeadlines {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 2fr 2fr 1.5fr;
+    grid-column-gap: 12px;
+    margin: 12px 23px 0 23px;
+}
+.resultHeadline,
+.resultValue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.resultHeadline {
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.1em;
+}
+.resultValue {
+    margin: 8px 0 8px 0;
+    height: 35px;
+    background-color: var(--color-06);
+    border: 2px solid white;
+    border-radius: 5px;
+}
+.resultValueCorrect {
+    background-color: var(--color-01);
+}
+.resultValueWrong {
+    background-color: var(--color-04);
+}
+.resultSpace {
+    margin: 8px 0 24px 0;
+}
+
+/* Button to Continue/Restart the Game */
+.buttonHolder {
+    display: flex;
+    justify-content: center;
+}
 #buttonStep01,
-#buttonStep02 {
+#buttonStep02,
+#buttonStep03 {
     padding: 8px;
     width: 25%;
     border: 2px solid white;
     border-radius: 5px;
     cursor: pointer;
-    float: right;
     text-align: center;
     font-size: 1em;
 }
 #buttonStep01 {
     margin: 15px 5px 5px 5px;
+    float: right;
 }
 #buttonStep02 {
     margin: 20px 24px 16px 0;
+    float: right;
+}
+#buttonStep03 {
+    margin: 10px 0 5px 0;
 }
 .buttonLocked {
     background-color: var(--color-02);
 }
 .buttonUnlocked {
-    background-color: var(--color-01);
+    background-color: var(--color-07);
+    color: white;
 }
 
 /* Section 5: Player */
@@ -344,7 +405,8 @@ section {
 /* Footer */
 footer {
     position: fixed;
+    padding: 0 12px 0 0;
     bottom: 8px;
     width: 100%;
-    text-align: center;
+    text-align: right;
 }
