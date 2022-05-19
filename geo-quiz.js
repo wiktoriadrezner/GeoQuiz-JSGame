@@ -1024,7 +1024,7 @@ function retrieveData() {
     }
 }
 
-let gameStep = "step01";
+let gameStep = "step01"; /* Default Game Step Is Step01 */
 window.addEventListener("load", () => {
     /* Retrieve Data from Local/Session Storage */
     retrieveData();
