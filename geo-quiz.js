@@ -375,9 +375,40 @@ function gameStep01() {
     buttonStep01Elm.classList.add("buttonLocked");
     buttonStep01Elm.innerHTML = "Click to Continue";
     sectionGameStep01Elm.appendChild(buttonStep01Elm);
-
-    /* Loop Through 15 Countries */
+    /* All Countries */
     const countryNameElm = document.querySelectorAll(".countryName");
+
+    /* Retrieve the Selected Countries From Storage */
+    if (indexSelected !== 0) {
+        /* 3 Countries Were Selected */
+        if (indexSelected === 3) {
+            buttonStep01Elm.classList.add("buttonUnlocked"); /* Unlock the Button to Proceed */
+            for (let x = 0; x < countriesSelected.length; x++) {
+                for (let y = 0; y < countryNameElm.length; y++) {
+                    if (countriesSelected[x] === countryNameElm[y].innerHTML) {
+                        countryNameElm[y].classList.add("countryNameSelected");
+                    }
+                }
+            }
+            /* Lock the Remaining Countries */
+            for (let y = 0; y < countryNameElm.length; y++) {
+                if (countryNameElm[y].classList.contains("countryNameSelected")) continue;
+                else {
+                    countryNameElm[y].classList.add("countryNameLocked");
+                }
+            }
+        } /* 1 or 2 Countries Were Selected */ else {
+            for (let x = 0; x < countriesSelected.length; x++) {
+                for (let y = 0; y < countryNameElm.length; y++) {
+                    if (countriesSelected[x] === countryNameElm[y].innerHTML) {
+                        countryNameElm[y].classList.add("countryNameSelected");
+                    }
+                }
+            }
+        }
+    }
+
+    /* Select 3 Countries */
     for (let i = 0; i < countryNameElm.length; i++) {
         countryNameElm[i].addEventListener("click", () => {
             if (currentPlayer === "NONE") {
@@ -972,6 +1003,7 @@ function retrieveData() {
     if (sessionStorage.getItem("answers") !== null) {
         answersStorage = JSON.parse(sessionStorage.getItem("answers"));
     }
+    /* Latest Selection */
     if (sessionStorage.getItem("answerSelected") !== null) {
         answerSelected = JSON.parse(sessionStorage.getItem("answerSelected"));
         answerSelectedValue = JSON.parse(sessionStorage.getItem("answerSelectedValue"));
@@ -989,7 +1021,6 @@ function retrieveData() {
         quizAnswer04 = JSON.parse(sessionStorage.getItem("quizAnswer04"));
         /* Correct Answer */
         correctAnswer = JSON.parse(sessionStorage.getItem("correctAnswer"));
-        /* Latest Selection */
     }
 }
 

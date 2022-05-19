@@ -69,6 +69,7 @@ section {
     padding: 8px;
     height: fit-content;
     background-color: var(--color-03);
+    border-radius: 5px;
 }
 .sectionHeader {
     margin: 0 0 0 4px;
