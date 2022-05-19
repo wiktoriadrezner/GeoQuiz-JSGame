@@ -5,13 +5,14 @@
 
 * {
     /* Color Palette */
-    --color-01: #d7ffc2; /* Herbal Green */
+    --color-01: #c9e8ad; /* Herbal Green (Correct Value) */
     --color-02: #f8f8e7; /* Grey with a Tint of Yellow */
     --color-03: #b9b9b9; /* Light Grey */
     --color-04: #ffaeaa; /* Light Red (Selected Content) */
     --color-05: #717171; /* Dark Grey (Locked Content) */
     --color-06: #e4ecea; /* Light Grey with a Tint of Blue */
     --color-07: #546d57; /* Dark Green */
+    --color-08: #99c175; /* Green (Country Selected) */
     scroll-behavior: smooth;
     box-sizing: border-box;
     font-family: Open Sans;
@@ -150,7 +151,7 @@ section {
 }
 .countryNameSelected {
     pointer-events: none; /* Select Country Once */
-    background-color: var(--color-04);
+    background-color: var(--color-08);
     border: 2px solid white;
 }
 .countryNameLocked {
@@ -231,7 +232,10 @@ section {
     display: grid;
     grid-template-columns: 1.5fr 2fr 2fr 2fr 1.5fr;
     grid-column-gap: 12px;
-    margin: 12px 23px 0 23px;
+    margin: 15px 23px 0 23px;
+}
+#resultsList {
+    margin: 0px 23px 0 23px;
 }
 .resultHeadline,
 .resultValue {
