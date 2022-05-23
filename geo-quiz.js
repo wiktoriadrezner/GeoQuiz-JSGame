@@ -611,17 +611,27 @@ function generateAnswers() {
 let jokerCounter = 0; /* Variable That Holds the Points For Joker */
 let jokersAvailable = 0;
 let jokersUsed = 0;
+/* Variables to Retrieve Jokers From Session Storage */
+let jokersAvailableRetrieve;
+let jokersUsedRetrieve;
 function actionJoker() {
     /* Jokers Available */
     const jokersAvailableElm = document.querySelector("#jokersAvailable");
     const jokerAvailableElm = document.createElement("div");
     jokerAvailableElm.setAttribute("id", "jokerAvailable");
     jokerAvailableElm.innerHTML = "⏱️";
+    if (jokersAvailableRetrieve === 1) {
+        jokersAvailableElm.appendChild(jokerAvailableElm);
+    }
+
     /* Jokers Used */
     const jokersUsedElm = document.querySelector("#jokersUsed");
     const jokerUsedElm = document.createElement("div");
     jokerUsedElm.setAttribute("id", "jokerUsed");
     jokerUsedElm.innerHTML = "⏱️";
+    if (jokersUsedRetrieve === 1) {
+        jokersUsedElm.appendChild(jokerUsedElm);
+    }
 
     /* Add an Available Joker */
     if (jokerCounter >= 1200) {
@@ -629,12 +639,7 @@ function actionJoker() {
         sessionStorage.jokersAvailable = JSON.stringify(jokersAvailable);
         jokerCounter -= 1200;
         sessionStorage.jokerCounter = JSON.stringify(jokerCounter);
-    }
-    for (let i = 0; i < jokersAvailable; i++) {
         jokersAvailableElm.appendChild(jokerAvailableElm);
-    }
-    for (let i = 0; i < jokersUsed; i++) {
-        jokersUsedElm.appendChild(jokerUsedElm);
     }
 
     /* Use an Available Joker */
@@ -671,6 +676,7 @@ function updatePoints() {
     }
     sessionStorage.points = JSON.stringify(points);
     pointsElm.innerText = points;
+    sessionStorage.jokerCounter = JSON.stringify(jokerCounter);
     actionJoker();
 }
 
@@ -1077,11 +1083,19 @@ function retrieveData() {
     /* Jokers */
     if (sessionStorage.getItem("jokersAvailable") !== null) {
         jokersAvailable = JSON.parse(sessionStorage.getItem("jokersAvailable"));
-        actionJoker();
+        jokersAvailableRetrieve = 1;
+        for (let i = 0; i < jokersAvailable; i++) {
+            actionJoker();
+        }
+        jokersAvailableRetrieve = 0;
     }
     if (sessionStorage.getItem("jokersUsed") !== null) {
         jokersUsed = JSON.parse(sessionStorage.getItem("jokersUsed"));
-        actionJoker();
+        jokersUsedRetrieve = 1;
+        for (let i = 0; i < jokersUsed; i++) {
+            actionJoker();
+        }
+        jokersUsedRetrieve = 0;
     }
 }
 
