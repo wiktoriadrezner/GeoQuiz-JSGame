@@ -5,14 +5,13 @@
 
 * {
     /* Color Palette */
-    --color-01: #c9e8ad; /* Herbal Green (Correct Value) */
+    --color-01: #c9e8ad; /* Herbal Green (Correct/Selected Value) */
     --color-02: #f8f8e7; /* Grey with a Tint of Yellow */
     --color-03: #b9b9b9; /* Light Grey */
     --color-04: #ffaeaa; /* Light Red (Selected Content) */
     --color-05: #717171; /* Dark Grey (Locked Content) */
     --color-06: #e4ecea; /* Light Grey with a Tint of Blue */
     --color-07: #546d57; /* Dark Green */
-    --color-08: #99c175; /* Green (Country Selected) */
     scroll-behavior: smooth;
     box-sizing: border-box;
     font-family: Open Sans;
@@ -145,14 +144,14 @@ section {
     padding: 8px;
     text-align: center;
     font-size: 1.05em;
-    background-color: var(--color-01);
+    background-color: var(--color-06);
     border: 2px solid white;
     border-radius: 5px;
     cursor: pointer;
 }
 .countryNameSelected {
     pointer-events: none; /* Select Country Once */
-    background-color: var(--color-08);
+    background-color: var(--color-01);
     border: 2px solid white;
 }
 .countryNameLocked {
@@ -328,9 +327,9 @@ section {
     height: 30px;
     font-size: 12px;
     float: right;
-    border: 2px solid var(--color-01);
+    border: 2px solid var(--color-06);
     border-radius: 5px;
-    background-color: var(--color-01);
+    background-color: var(--color-06);
     color: black;
     cursor: pointer;
 }
