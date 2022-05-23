@@ -648,18 +648,18 @@ function generateAnswers() {
 }
 
 let jokerCounter = 0; /* Variable That Holds the Points For Joker */
-let jokersAvailable = 0;
+let jokersAvailable, jokersUsed;
 function actionJoker() {
   /* Jokers Available */
   const jokersAvailableElm = document.querySelector("#jokersAvailable");
   const jokerAvailableElm = document.createElement("div");
   jokerAvailableElm.setAttribute("id", "jokerAvailable");
   jokerAvailableElm.innerHTML = "⏱️";
-  /* Jokers Purchased */
-  const jokersPurchasedElm = document.querySelector("#jokersUsed");
-  const jokerPurchasedElm = document.createElement("div");
-  jokerPurchasedElm.setAttribute("id", "jokerUsed");
-  jokerPurchasedElm.innerHTML = "⏱️";
+  /* Jokers Used */
+  const jokersUsedElm = document.querySelector("#jokersUsed");
+  const jokerUsedElm = document.createElement("div");
+  jokerUsedElm.setAttribute("id", "jokerUsed");
+  jokerUsedElm.innerHTML = "⏱️";
 
   /* Add an Available Joker */
   if (jokerCounter >= 1200) {
@@ -671,6 +671,9 @@ function actionJoker() {
   for (let i = 0; i < jokersAvailable; i++) {
     jokersAvailableElm.appendChild(jokerAvailableElm);
   }
+  for (let i = 0; i < jokersUsed; i++) {
+    jokersUsedElm.appendChild(jokerUsedElm);
+  }
 
   /* Use an Available Joker */
   jokerAvailableElm.addEventListener("click", () => {
@@ -681,7 +684,9 @@ function actionJoker() {
     sessionStorage.jokersAvailable = JSON.stringify(jokersAvailable);
     jokersAvailableElm.removeChild(jokerAvailableElm);
     /* Move Joker to Used */
-    jokersPurchasedElm.appendChild(jokerPurchasedElm);
+    jokersUsed++;
+    sessionStorage.jokersUsed = JSON.stringify(jokersUsed);
+    jokersUsedElm.appendChild(jokerUsedElm);
   });
 }
 
@@ -1117,6 +1122,10 @@ function retrieveData() {
   /* Jokers */
   if (sessionStorage.getItem("jokersAvailable") !== null) {
     jokersAvailable = JSON.parse(sessionStorage.getItem("jokersAvailable"));
+    actionJoker();
+  }
+  if (sessionStorage.getItem("jokersUsed") !== null) {
+    jokersUsed = JSON.parse(sessionStorage.getItem("jokersUsed"));
     actionJoker();
   }
 }
