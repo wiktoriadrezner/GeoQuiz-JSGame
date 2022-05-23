@@ -194,6 +194,7 @@ timeElm.innerText = timeLeft;
 function timer() {
   timeLeft--;
   timeElm.innerText = timeLeft;
+  sessionStorage.timeLeft = JSON.stringify(timeLeft);
   if (timeLeft > 0) {
     setTimeout(timer, 1000);
   }
@@ -667,6 +668,8 @@ function actionJoker() {
 
   /* Use an Available Joker */
   jokerAvailableElm.addEventListener("click", () => {
+    timeLeft = 20;
+    timer();
     /* Delete Joker From Available List */
     jokersAvailableElm.removeChild(jokerAvailableElm);
     /* Move Joker to Used */
@@ -798,6 +801,9 @@ function gameStep02() {
       firstQuestionGenerated
     );
   } else {
+    /* Retrieve Timer */
+    timeElm.innerText = timeLeft;
+    timer();
     /* Retrieve the Generated Parameters */
     parameter01QuestionNrElm.innerText = questionCounter; /* Question Number */
     parameter02CountryElm.innerText = parameterCountry; /* Country Name */
@@ -919,6 +925,10 @@ function gameStep03() {
   /* Update Player Score and Display Points */
   scorePlayer = points;
   updateScore();
+
+  /* Set Timer back to default */
+  timeLeft = "–";
+  timeElm.innerText = timeLeft;
 
   /* HTML Element: Header */
   const sectionHeaderElm = document.createElement("div");
@@ -1045,6 +1055,10 @@ function retrieveData() {
   /* Latest Screen */
   if (sessionStorage.getItem("gameStep") !== null) {
     gameStep = JSON.parse(sessionStorage.getItem("gameStep"));
+  }
+  /* Game Timer */
+  if (sessionStorage.getItem("timeLeft") !== null) {
+    timeLeft = JSON.parse(sessionStorage.getItem("timeLeft"));
   }
   /* Points */
   if (sessionStorage.getItem("points") !== null) {
