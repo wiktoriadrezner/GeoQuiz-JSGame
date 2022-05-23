@@ -648,6 +648,7 @@ function generateAnswers() {
 }
 
 let jokerCounter = 0; /* Variable That Holds the Points For Joker */
+let jokersAvailable = 0;
 function actionJoker() {
   /* Jokers Available */
   const jokersAvailableElm = document.querySelector("#jokersAvailable");
@@ -662,8 +663,13 @@ function actionJoker() {
 
   /* Add an Available Joker */
   if (jokerCounter >= 1200) {
-    jokersAvailableElm.appendChild(jokerAvailableElm);
+    jokersAvailable++;
+    sessionStorage.jokersAvailable = JSON.stringify(jokersAvailable);
     jokerCounter -= 1200;
+    sessionStorage.jokerCounter = JSON.stringify(jokerCounter);
+  }
+  for (let i = 0; i < jokersAvailable; i++) {
+    jokersAvailableElm.appendChild(jokerAvailableElm);
   }
 
   /* Use an Available Joker */
@@ -671,6 +677,8 @@ function actionJoker() {
     timeLeft = 20;
     timer();
     /* Delete Joker From Available List */
+    jokersAvailable--;
+    sessionStorage.jokersAvailable = JSON.stringify(jokersAvailable);
     jokersAvailableElm.removeChild(jokerAvailableElm);
     /* Move Joker to Used */
     jokersPurchasedElm.appendChild(jokerPurchasedElm);
@@ -1064,6 +1072,7 @@ function retrieveData() {
   if (sessionStorage.getItem("points") !== null) {
     points = JSON.parse(sessionStorage.getItem("points"));
     pointsElm.innerText = points;
+    jokerCounter = JSON.parse(sessionStorage.getItem("jokerCounter"));
   }
   /* Selected Countries */
   if (sessionStorage.getItem("countriesSelected") !== null) {
@@ -1104,6 +1113,10 @@ function retrieveData() {
     quizAnswer04 = JSON.parse(sessionStorage.getItem("quizAnswer04"));
     /* Correct Answer */
     correctAnswer = JSON.parse(sessionStorage.getItem("correctAnswer"));
+  }
+  /* Jokers */
+  if (sessionStorage.getItem("jokersAvailable") !== null) {
+    jokersAvailable = JSON.parse(sessionStorage.getItem("jokersAvailable"));
   }
 }
 
