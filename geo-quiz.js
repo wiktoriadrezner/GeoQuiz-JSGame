@@ -1117,6 +1117,7 @@ function retrieveData() {
   /* Jokers */
   if (sessionStorage.getItem("jokersAvailable") !== null) {
     jokersAvailable = JSON.parse(sessionStorage.getItem("jokersAvailable"));
+    actionJoker();
   }
 }
 
