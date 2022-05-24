@@ -895,6 +895,7 @@ function gameStep02() {
                     }
                     sessionStorage.questionCounter = JSON.stringify(questionCounter);
                     generateAnswers();
+                    musicGameElm.play();
                     answerSelected = 0;
                     answerSelectedValue = "NONE";
                     sessionStorage.answerSelected = JSON.stringify(answerSelected);
