@@ -8,6 +8,12 @@
         <link rel="stylesheet" href="geo-quiz.css" />
     </head>
     <body class="backgroundImage">
+        <!-- Game Audio -->
+        <audio id="musicGame" loop src="Music/music-game.mp3"></audio>
+        <audio id="musicClick" src="Music/music-click.mp3"></audio>
+        <audio id="musicAnswerCorrect" src="Music/music-answer-correct.mp3"></audio>
+        <audio id="musicAnswerWrong" src="Music/music-answer-wrong.mp3"></audio>
+        <audio id="musicResults" src="Music/music-results.mp3"></audio>
         <header>
             <div class="headerText">GeoQuiz</div>
             <div class="subheaderText">Fun and Interactive Way to Test Your Geography Knowledge</div>
@@ -15,17 +21,17 @@
         <main>
             <!-- Section 1: Time Counter -->
             <section class="sectionTimeCounter">
-                <div class="sectionHeader">Time Left</div>
+                <div class="sectionHeader sectionHeaderMiddle">Time Left</div>
                 <div id="time"></div>
             </section>
             <!-- Section 2: Points -->
             <section class="sectionPoints">
-                <div class="sectionHeader">Your Points</div>
+                <div class="sectionHeader sectionHeaderMiddle">Your Points</div>
                 <div id="points"></div>
             </section>
             <!-- Section 3: Countries -->
             <section class="sectionCountriesList">
-                <div class="sectionHeader">Countries Selected</div>
+                <div class="sectionHeader sectionHeaderLeft">Countries Selected</div>
                 <div id="country01">
                     <div class="countriesListText">1.</div>
                 </div>
@@ -48,7 +54,7 @@
             <!-- Section 5: Player -->
             <section class="sectionPlayer">
                 <!-- Add a New Player -->
-                <div class="sectionHeader">Player</div>
+                <div class="sectionHeader sectionHeaderLeft">Player</div>
                 <form id="formAddPlayer">
                     <input id="inputAddPlayer" type="text" minlength="1" maxlength="30" placeholder="Enter Player Name" />
                     <input id="submitAddPlayer" type="submit" value="Add Player" />
@@ -61,7 +67,7 @@
             <!-- Section 6: Score -->
             <section class="sectionScore">
                 <!-- Current Score -->
-                <div class="sectionHeader">Score</div>
+                <div class="sectionHeader sectionHeaderLeft">Score</div>
                 <div id="scorePlayer">
                     <div class="scoreText">Your Score:</div>
                     <div id="scorePlayerValue"></div>
@@ -74,11 +80,7 @@
             </section>
             <!-- Section 7: Jokers -->
             <section class="sectionJokers">
-                <div class="sectionHeader">Jokers</div>
-                <div class="jokerHolder">
-                    <div class="jokersText">Joker Value:</div>
-                    <div class="jokerValue">1200 points</div>
-                </div>
+                <div class="sectionHeader sectionHeaderLeft">Jokers</div>
                 <div id="jokersAvailable">
                     <div class="jokersText">Jokers Available:</div>
                 </div>
@@ -88,7 +90,7 @@
             </section>
             <!-- Section 8: Rules of the Game -->
             <section class="sectionRules">
-                <div class="sectionHeader">Rules of the Game</div>
+                <div class="sectionHeader sectionHeaderLeft">Rules of the Game</div>
                 <!-- Rule nr 1 -->
                 <p class="rulesText">
                     <span class="boldNumber">1.</span>
@@ -118,7 +120,7 @@
                 </p>
             </section>
         </main>
-        <footer>GeoQuiz — 2022 — Jönköping University</footer>
+        <footer>2022 — GeoQuiz — Jönköping</footer>
         <script src="geo-quiz.js"></script>
     </body>
 </html>
