@@ -1,0 +1,457 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"); /* Open Sans */
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap"); /* Righteous */
+@import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap"); /* Hammersmith One */
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"); /* Abril Fatface */
+
+* {
+    /* Color Palette */
+    --color-01: #c9e8ad; /* Herbal Green (Correct/Selected Value) */
+    --color-02: #f8f8e7; /* Grey with a Tint of Yellow */
+    --color-03: #b7bebe; /* Light Grey */
+    --color-04: #ffaeaa; /* Light Red (Selected Content) */
+    --color-05: #717171; /* Dark Grey (Locked Content) */
+    --color-06: #e4ecea; /* Light Grey with a Tint of Blue */
+    --color-07: #546d57; /* Dark Green */
+    --color-08: #e8e6aa; /* Dirty Yellow */
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    font-family: Open Sans;
+    color: black;
+    cursor: default;
+    margin: 0;
+    padding: 0;
+}
+
+/* Text Accents */
+.boldText {
+    font-weight: bolder;
+    color: var(--color-06);
+}
+.boldNumber {
+    font-family: "Hammersmith One", sans-serif;
+    font-weight: bold;
+}
+
+/* Background and Body */
+body {
+    margin: 0px;
+    padding: 12px;
+}
+.backgroundImage {
+    height: 100vh;
+    background-image: url(world-map.png);
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+/* Header and Subheader */
+header {
+    text-align: center;
+    margin: 0 0 8px 0;
+}
+.headerText {
+    font-family: "Righteous", cursive;
+    font-size: 4.5em;
+}
+.subheaderText {
+    font-size: 1em;
+    margin: 0 0 24px 0;
+}
+
+/* Screen Sections (8) */
+main {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr 1.1fr;
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+    margin: 0 12px 0 12px;
+}
+section {
+    padding: 8px;
+    height: fit-content;
+    background-color: var(--color-03);
+    border-radius: 5px;
+}
+.sectionHeader {
+    font-family: "Abril Fatface", cursive;
+    font-size: 1.4em;
+    color: var(--color-02);
+}
+.sectionHeaderMiddle {
+    text-align: center;
+}
+.sectionHeaderLeft {
+    margin: 0 0 0 4px;
+    text-align: left;
+}
+.sectionHeaderGame {
+    text-align: center;
+    font-size: 2em;
+    margin: 0 0 16px 0;
+}
+
+/* Section 1: Time */
+.sectionTimeCounter {
+    grid-area: 1 / 3 / 2 / 4;
+    align-self: end;
+}
+
+/* Section 2: Points */
+.sectionPoints {
+    grid-area: 1 / 2 / 2 / 3;
+    align-self: end;
+}
+#time,
+#points {
+    font-family: "Hammersmith One", sans-serif;
+    text-align: center;
+    font-size: 1.4em;
+}
+
+/* Section 3: Countries */
+.sectionCountriesList {
+    grid-area: 2 / 1 / 3 / 2;
+    height: auto;
+}
+#country01,
+#country02,
+#country03 {
+    display: flex;
+    align-items: center;
+    font-size: 1.05em;
+}
+.countriesListText {
+    margin: 0 8px 0 23px;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.2em;
+}
+
+/* Section 4: Game Screen */
+.sectionGame {
+    grid-area: 2 / 2 / 7 / 5;
+    margin-bottom: 12px;
+}
+
+/* Step 1: Select Countries */
+#sectionGameStep01 {
+    padding: 0;
+}
+.countrySelection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    padding: 8px 0 0 0;
+}
+.countrySelectionTextBold {
+    font-family: "Hammersmith One", sans-serif;
+    padding: 0 0 5px 0;
+    margin: 0 8px 0 23px;
+}
+.countrySelectionTextBold,
+.countrySelectionText {
+    font-size: 1.1em;
+    display: inline;
+}
+/* Step 1: Change Country Colors Based On State */
+.countryName,
+.countryNameSelected,
+.countryNameLocked {
+    margin: 5px;
+    padding: 8px;
+    text-align: center;
+    font-size: 1.05em;
+    background-color: var(--color-06);
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.5s;
+}
+.countryNameSelected {
+    pointer-events: none; /* Select Country Once */
+    background-color: var(--color-01);
+    border: 2px solid white;
+}
+.countryNameLocked {
+    pointer-events: none; /* Select Country Once */
+    background-color: var(--color-05);
+    border: 2px solid white;
+}
+
+.countryName:hover {
+    transform: scale(1.05);
+}
+
+/* Step 2: Quiz Parameters */
+#sectionGameStep02 {
+    padding: 0;
+}
+.quizParameters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 0 0 0;
+    justify-items: center;
+}
+.quizParameter {
+    display: flex;
+}
+.parameterTextBold {
+    margin: 0 8px 0 0;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.2em;
+}
+#parameterQuestionNr,
+#parameterCountry,
+#parameterTopic {
+    font-size: 1.15em;
+}
+/* Step 2: Question and Answers */
+.quizQuestion {
+    text-align: center;
+    margin: 4px 0 16px 0;
+    font-size: 1.25em;
+}
+.quizAnswers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 24px;
+    grid-row-gap: 24px;
+    margin: 30px 30px 0 30px;
+    text-align: center;
+}
+.quizAnswer {
+    margin: 0 25px 0 25px;
+    height: 70px;
+    background-color: var(--color-06);
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: transform 0.5s;
+}
+.quizAnswer:hover {
+    transform: scale(1.05);
+}
+.quizAnswerWrong {
+    background-color: var(--color-04);
+}
+.quizAnswerCorrect {
+    background-color: var(--color-01);
+}
+
+/* Step 3: Results */
+#sectionGameStep03 {
+    padding: 0;
+}
+.resultsHolder {
+    display: flex;
+    align-items: center;
+    margin: 4px 0 0 0;
+}
+.resultsHolderText {
+    margin: 0 8px 0 23px;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.2em;
+}
+#resultsList,
+.resultsHeadlines {
+    display: grid;
+    grid-template-columns: 1fr 1.9fr 1.9fr 1.9fr 1.5fr;
+    grid-column-gap: 12px;
+    margin: 15px 23px 0 23px;
+}
+#resultsList {
+    margin: 0px 23px 0 23px;
+}
+.resultHeadline,
+.resultValue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.resultHeadline {
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.1em;
+}
+.resultValue {
+    margin: 8px 0 8px 0;
+    height: 35px;
+    background-color: var(--color-06);
+    border: 2px solid white;
+    border-radius: 5px;
+}
+.resultValueCorrect {
+    background-color: var(--color-01);
+}
+.resultValueWrong {
+    background-color: var(--color-04);
+}
+.resultValueNotAnswered {
+    background-color: var(--color-08);
+}
+.resultSpace {
+    margin: 8px 0 24px 0;
+}
+
+/* Button to Continue/Restart the Game */
+.buttonHolder {
+    display: flex;
+    justify-content: center;
+}
+#buttonStep01,
+#buttonStep02,
+#buttonStep03 {
+    padding: 8px;
+    width: 25%;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1em;
+}
+#buttonStep01 {
+    margin: 15px 5px 5px 5px;
+    float: right;
+}
+#buttonStep02 {
+    margin: 20px 24px 16px 0;
+    float: right;
+}
+#buttonStep03 {
+    margin: 10px 0 5px 0;
+}
+.buttonLocked {
+    background-color: var(--color-02);
+}
+.buttonUnlocked {
+    background-color: var(--color-07);
+    color: white;
+    transition: transform 0.5s;
+}
+.buttonUnlocked:hover {
+    transform: scale(1.05);
+}
+
+/* Section 5: Player */
+.sectionPlayer {
+    grid-area: 1 / 4 / 2 / 6;
+}
+
+/* Add a New Player */
+#inputAddPlayer {
+    margin: 8px 0 8px 7px;
+    padding: 8px;
+    width: 76%;
+    height: 30px;
+    font-size: 12px;
+    float: left;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: text;
+}
+#inputAddPlayer:focus {
+    outline: none;
+    border-color: var(--color-06);
+}
+#submitAddPlayer {
+    margin: 8px 7px 8px 0;
+    width: 20%;
+    height: 30px;
+    font-size: 12px;
+    float: right;
+    border: 2px solid var(--color-06);
+    border-radius: 5px;
+    background-color: var(--color-06);
+    color: black;
+    cursor: pointer;
+    transition: transform 0.5s;
+}
+#submitAddPlayer:hover {
+    transform: scale(1.05);
+}
+
+/* Current Player */
+#player {
+    margin: 0 7px 0 7px;
+    width: 100%;
+    height: 25px;
+    display: flex;
+    align-items: center;
+}
+.playerIntroduction {
+    margin: 0 8px 0 16px;
+    background-color: transparent;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.1em;
+}
+.playerInput {
+    font-size: 1.1em;
+}
+.playerDelete {
+    margin: 0 0 0 8px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Section 6: Score */
+.sectionScore {
+    grid-area: 3 / 1 / 4 / 2;
+}
+#scorePlayer,
+#scoreHighest {
+    display: flex;
+    align-items: center;
+    margin: 4px 0 0 0;
+}
+.scoreText {
+    margin: 0 8px 0 23px;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.1em;
+}
+
+/* Section 7: Jokers */
+.sectionJokers {
+    grid-area: 4 / 1 / 5 / 2;
+}
+#jokersAvailable,
+#jokersUsed,
+.jokerHolder {
+    display: flex;
+    align-items: center;
+    margin: 4px 0 0 0;
+}
+.jokersText {
+    margin: 0 8px 0 23px;
+    font-family: "Hammersmith One", sans-serif;
+    font-size: 1.1em;
+}
+#jokerAvailable,
+#jokerUsed {
+    margin: 0 8px 0 0;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* Section 8: Rules */
+.sectionRules {
+    grid-area: 2 / 5 / 5 / 6;
+}
+.rulesText {
+    margin: 4px 0 0 12px;
+    font-size: 0.95em;
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    padding: 0 55px 0 0;
+    width: 100%;
+    text-align: right;
+    bottom: 8px;
+    font-size: 0.95em;
+}

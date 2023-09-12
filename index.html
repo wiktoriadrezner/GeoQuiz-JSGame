@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>GeoQuiz</title>
+        <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
+        <link rel="stylesheet" href="geo-quiz.css" />
+    </head>
+    <body class="backgroundImage">
+        <!-- Game Audio -->
+        <audio id="musicGame" loop src="Music/music-game.mp3"></audio>
+        <audio id="musicClick" src="Music/music-click.mp3"></audio>
+        <audio id="musicAnswerCorrect" src="Music/music-answer-correct.mp3"></audio>
+        <audio id="musicAnswerWrong" src="Music/music-answer-wrong.mp3"></audio>
+        <audio id="musicResults" src="Music/music-results.mp3"></audio>
+        <header>
+            <div class="headerText">GeoQuiz</div>
+            <div class="subheaderText">Fun and Interactive Way to Test Your Geography Knowledge</div>
+        </header>
+        <main>
+            <!-- Section 1: Time Counter -->
+            <section class="sectionTimeCounter">
+                <div class="sectionHeader sectionHeaderMiddle">Time Left</div>
+                <div id="time"></div>
+            </section>
+            <!-- Section 2: Points -->
+            <section class="sectionPoints">
+                <div class="sectionHeader sectionHeaderMiddle">Your Points</div>
+                <div id="points"></div>
+            </section>
+            <!-- Section 3: Countries -->
+            <section class="sectionCountriesList">
+                <div class="sectionHeader sectionHeaderLeft">Countries Selected</div>
+                <div id="country01">
+                    <div class="countriesListText">1.</div>
+                </div>
+                <div id="country02">
+                    <div class="countriesListText">2.</div>
+                </div>
+                <div id="country03">
+                    <div class="countriesListText">3.</div>
+                </div>
+            </section>
+            <!-- Section 4: Game Screen -->
+            <section class="sectionGame">
+                <!-- Step 1: Select Countries -->
+                <section id="sectionGameStep01"></section>
+                <!-- Step 2: Quiz -->
+                <section id="sectionGameStep02"></section>
+                <!-- Step 3: Results -->
+                <section id="sectionGameStep03"></section>
+            </section>
+            <!-- Section 5: Player -->
+            <section class="sectionPlayer">
+                <!-- Add a New Player -->
+                <div class="sectionHeader sectionHeaderLeft">Player</div>
+                <form id="formAddPlayer">
+                    <input id="inputAddPlayer" type="text" minlength="1" maxlength="30" placeholder="Enter Player Name" />
+                    <input id="submitAddPlayer" type="submit" value="Add Player" />
+                </form>
+                <!-- Update Current Player -->
+                <div id="player">
+                    <div class="playerIntroduction">Currently Playing:</div>
+                </div>
+            </section>
+            <!-- Section 6: Score -->
+            <section class="sectionScore">
+                <!-- Current Score -->
+                <div class="sectionHeader sectionHeaderLeft">Score</div>
+                <div id="scorePlayer">
+                    <div class="scoreText">Your Score:</div>
+                    <div id="scorePlayerValue"></div>
+                </div>
+                <!-- Highest Score -->
+                <div id="scoreHighest">
+                    <div class="scoreText">Highest Score:</div>
+                    <div id="scoreHighestValue"></div>
+                </div>
+            </section>
+            <!-- Section 7: Jokers -->
+            <section class="sectionJokers">
+                <div class="sectionHeader sectionHeaderLeft">Jokers</div>
+                <div id="jokersAvailable">
+                    <div class="jokersText">Jokers Available:</div>
+                </div>
+                <div id="jokersUsed">
+                    <div class="jokersText">Jokers Used:</div>
+                </div>
+            </section>
+            <!-- Section 8: Rules of the Game -->
+            <section class="sectionRules">
+                <div class="sectionHeader sectionHeaderLeft">Rules of the Game</div>
+                <!-- Rule nr 1 -->
+                <p class="rulesText">
+                    <span class="boldNumber">1.</span>
+                    Only <span class="boldText">one answer</span> to every question is correct.
+                </p>
+                <!-- Rule nr 2 -->
+                <p class="rulesText">
+                    <span class="boldNumber">2.</span>
+                    You can't change your answer once
+                    <span class="boldText">selected</span>.
+                </p>
+                <!-- Rule nr 3 -->
+                <p class="rulesText">
+                    <span class="boldNumber">3.</span>
+                    You have <span class="boldText">10 seconds</span> to answer a question.
+                </p>
+                <!-- Rule nr 4 -->
+                <p class="rulesText">
+                    <span class="boldNumber">4.</span>
+                    For every <span class="boldText">1200 points</span> earned, you receive a Joker.
+                </p>
+                <!-- Rule nr 5 -->
+                <p class="rulesText">
+                    <span class="boldNumber">5.</span>
+                    A Joker lenghtens time to answer the question to
+                    <span class="boldText">20 seconds</span>.
+                </p>
+            </section>
+        </main>
+        <footer>2022 — GeoQuiz — Jönköping</footer>
+        <script src="geo-quiz.js"></script>
+    </body>
+</html>
